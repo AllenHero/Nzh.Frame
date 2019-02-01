@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nzh.Frame.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Nzh.Frame.Model.Base.BaseEntity">
+            <summary>
+            基础实体
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.BaseEntity.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.BaseEntity.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.BaseEntity.CreateID">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.BaseEntity.UpdateTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.BaseEntity.UpdateID">
+            <summary>
+            修改人
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.BaseEntity.DeleteTime">
+            <summary>
+            删除时间
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.BaseEntity.DeleteID">
+            <summary>
+            删除人
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.BaseEntity.IsDelete">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="T:Nzh.Frame.Model.Base.IBaseEntity">
+            <summary>
+            基础实体接口
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.IBaseEntity.ID">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.IBaseEntity.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.IBaseEntity.CreateID">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.IBaseEntity.UpdateTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.IBaseEntity.UpdateID">
+            <summary>
+            修改人
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.IBaseEntity.DeleteTime">
+            <summary>
+            删除时间
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.IBaseEntity.DeleteID">
+            <summary>
+            删除人
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Base.IBaseEntity.IsDelete">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="T:Nzh.Frame.Model.Common.OperationResult`1">
+            <summary>
+            操作返回类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Nzh.Frame.Model.Demo">
+            <summary>
+             Demo
+            </summary>
+        </member>
+        <member name="T:Nzh.Frame.Model.ViewModel.ViewDemo">
+            <summary>
+            ViewDemo 
+            </summary>
+        </member>
+    </members>
+</doc>

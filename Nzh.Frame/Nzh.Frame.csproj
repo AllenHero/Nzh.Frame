@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>84066b81-30ff-4294-90c4-3c257eab0ac5</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\64450\Desktop\Nzh.Frame\Nzh.Frame\Nzh.Frame.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netcoreapp2.0\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="Log\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nzh.Frame.Common\Nzh.Frame.Common.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.IRepository\Nzh.Frame.IRepository.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.IService\Nzh.Frame.IService.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.Model\Nzh.Frame.Model.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.Repository\Nzh.Frame.Repository.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.Service\Nzh.Frame.Service.csproj" />
+  </ItemGroup>
+
+</Project>

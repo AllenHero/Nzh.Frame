@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nzh.Frame.IService\Nzh.Frame.IService.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.Repository\Nzh.Frame.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="ReflectionIT.Mvc.Paging" Version="2.4.0" />
+  </ItemGroup>
+
+</Project>

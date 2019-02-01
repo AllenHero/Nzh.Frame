@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\64450\Desktop\Nzh.Frame\Nzh.Frame.Model\Nzh.Frame.Model.xml</DocumentationFile>
+    <OutputPath>C:\Users\64450\Desktop\Nzh.Frame\Nzh.Frame\bin\Debug\netcoreapp2.1\netcoreapp2.0\</OutputPath>
+  </PropertyGroup>
+
+</Project>

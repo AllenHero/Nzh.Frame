@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nzh.Frame</name>
+    </assembly>
+    <members>
+        <member name="T:Nzh.Frame.Controllers.DemoController">
+            <summary>
+            Demo
+            </summary>
+        </member>
+        <member name="M:Nzh.Frame.Controllers.DemoController.#ctor(Nzh.Frame.IService.IDemoService)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="demoservice"></param>
+        </member>
+        <member name="M:Nzh.Frame.Controllers.DemoController.GetDemoPageAsyncList(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            获取Demo分页
+            </summary>
+            <param name="Name"></param>
+            <param name="PageIndex"></param>
+            <param name="PageSize"></param>
+            <param name="Age"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nzh.Frame.Controllers.DemoController.GetDemoByIDAsync(System.Guid)">
+            <summary>
+             获取单个Demo
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nzh.Frame.Controllers.DemoController.AddDemoAsync(Nzh.Frame.Model.Demo)">
+            <summary>
+            新增Demo
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nzh.Frame.Controllers.DemoController.UpdateDemoAsync(System.Guid,Nzh.Frame.Model.Demo)">
+            <summary>
+            修改Demo
+            </summary>
+            <param name="ID"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nzh.Frame.Controllers.DemoController.DeleteDemoAsync(System.Guid)">
+            <summary>
+            删除Demo
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Nzh.Frame.Controllers.ValuesController">
+            <summary>
+             Values
+            </summary>
+        </member>
+        <member name="T:STD.NetCore.SwaggerHelp.SwaggerDocTag">
+            <summary>
+            Swagger注释帮助类
+            </summary>
+        </member>
+        <member name="M:STD.NetCore.SwaggerHelp.SwaggerDocTag.Apply(Swashbuckle.AspNetCore.Swagger.SwaggerDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            添加附加注释
+            </summary>
+            <param name="swaggerDoc"></param>
+            <param name="context"></param>
+        </member>
+    </members>
+</doc>
