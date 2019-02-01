@@ -75,7 +75,7 @@ namespace Nzh.Frame.Controllers
         public async Task<OperationResult<bool>> AddDemoAsync([FromBody]Demo model)
         {
             var startTime = DateTime.Now;
-            var result = await _demoservice.SaveDemoAsync(model);
+            var result = await _demoservice.AddDemoAsync(model);
             TimeSpan ts = DateTime.Now - startTime;
             result.TimeSpan = ts.TotalSeconds.ToString("F3");
             Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
@@ -98,7 +98,7 @@ namespace Nzh.Frame.Controllers
                 result.ErrorMessage = "ID参数有误";
             }
             else
-                result = await _demoservice.SaveDemoAsync(model);
+                result = await _demoservice.UpdateDemoAsync(model);
             TimeSpan ts = DateTime.Now - startTime;
             result.TimeSpan = ts.TotalSeconds.ToString("F3");
             Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志

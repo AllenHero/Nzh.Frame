@@ -29,11 +29,18 @@ namespace Nzh.Frame.IService
         Task<OperationResult<ViewDemo>> GetDemoByIDAsync(Guid ID);
 
         /// <summary>
-        /// 保存Demo
+        ///  添加Demo
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<OperationResult<bool>> SaveDemoAsync(Demo model);
+        Task<OperationResult<bool>> AddDemoAsync(Demo model);
+
+        /// <summary>
+        /// 修改Demo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<OperationResult<bool>> UpdateDemoAsync(Demo model);
 
         /// <summary>
         /// 删除Demo

@@ -70,16 +70,15 @@ namespace Nzh.Frame.Service
                 result.Data = await _demorepository.FindAsync(ID);
             //result.Data = _context.Demo.FromSql<Demo>("select * from demo").FirstOrDefault(); //执行sql语句
             //int count = _context.Database.ExecuteSqlCommand("select * from demo"); //执行sql语句
-           // result.Data = DbContextExtensions.SqlQuery("select * from demo");
             return _mapper.Map<OperationResult<ViewDemo>>(result);
         }
 
         /// <summary>
-        /// 保存Demo
+        /// 添加Demo
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<OperationResult<bool>> SaveDemoAsync(Demo model)
+        public async Task<OperationResult<bool>> AddDemoAsync(Demo model)
         {
             using (var tran = _context.Database.BeginTransaction())//开始事务
             {
@@ -92,9 +91,47 @@ namespace Nzh.Frame.Service
                         result.Success = false;
                         return result;
                     }
-                    result.Data = await _demorepository.SaveAsync(model);
-                    tran.Commit();//提交事务
-                    return result;
+                    else
+                        result.Data = await _demorepository.AddAsync(model);
+                        tran.Commit();//提交事务
+                        return result;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();//回滚事务
+                    throw ex;
+                }
+            }
+         }
+
+        
+
+        /// <summary>
+        /// 修改Demo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<OperationResult<bool>> UpdateDemoAsync(Demo model)
+        {
+            using (var tran = _context.Database.BeginTransaction())//开始事务
+            {
+                try
+                {
+                    var result = new OperationResult<bool>();
+                    var demo = await _demorepository.FindAsync(model.ID);
+                    if (model == null)
+                    {
+                        result.ErrorMessage = string.Format("ID有误:{0}", model.ID);
+                        result.Success = false;
+                    }
+                    else
+                        demo.Name = model.Name;
+                        demo.Sex = model.Sex;
+                        demo.Age = model.Age;
+                        demo.Remark = model.Remark;
+                        result.Data = await _demorepository.UpdateAsync(demo);
+                        tran.Commit();//提交事务
+                        return result;
                 }
                 catch (Exception ex)
                 {
@@ -116,12 +153,6 @@ namespace Nzh.Frame.Service
                 try
                 {
                     var result = new OperationResult<bool>();
-                    if (ID == Guid.Empty)
-                    {
-                        result.ErrorMessage = string.Format("ID有误:{0}", ID);
-                        result.Success = false;
-                        return result;
-                    }
                     var model = await _demorepository.FindAsync(ID);
                     if (model == null)
                     {
@@ -130,8 +161,8 @@ namespace Nzh.Frame.Service
                     }
                     else
                         result.Data = await _demorepository.DeleteAsync(model);
-                    tran.Commit(); //提交事务
-                    return result;
+                        tran.Commit(); //提交事务
+                        return result;   
                 }
                 catch (Exception ex)
                 {
