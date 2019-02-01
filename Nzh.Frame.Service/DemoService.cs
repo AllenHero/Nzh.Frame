@@ -4,6 +4,7 @@ using Nzh.Frame.IService;
 using Nzh.Frame.Model;
 using Nzh.Frame.Model.Common;
 using Nzh.Frame.Model.ViewModel;
+using Nzh.Frame.Repository.EF;
 using ReflectionIT.Mvc.Paging;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,13 @@ namespace Nzh.Frame.Service
     {
         private readonly IMapper _mapper;
         private readonly IDemoRepository _demorepository;
+        private readonly EFDbContext _context;
 
-        public DemoService(IDemoRepository demorepository, IMapper mapper)
+        public DemoService(IDemoRepository demorepository, IMapper mapper, EFDbContext context)
         {
             _demorepository = demorepository;
             _mapper = mapper;
+            _context = context;
         }
 
         /// <summary>
@@ -72,15 +75,27 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<OperationResult<bool>> SaveDemoAsync(Demo model)
         {
-            var result = new OperationResult<bool>();
-            if (model == null)
+            using (var tran = _context.Database.BeginTransaction())//开始事务
             {
-                result.ErrorMessage = "参数有误";
-                result.Success = false;
-                return result;
+                try
+                {
+                    var result = new OperationResult<bool>();
+                    if (model == null)
+                    {
+                        result.ErrorMessage = "参数有误";
+                        result.Success = false;
+                        return result;
+                    }
+                    result.Data = await _demorepository.SaveAsync(model);
+                    tran.Commit();//提交事务
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();//回滚事务
+                    throw ex;
+                }
             }
-            result.Data = await _demorepository.SaveAsync(model);
-            return result;
         }
 
         /// <summary>
@@ -90,22 +105,34 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<OperationResult<bool>> DeleteDemoAsync(Guid ID)
         {
-            var result = new OperationResult<bool>();
-            if (ID == Guid.Empty)
+            using (var tran = _context.Database.BeginTransaction()) //开始事务
             {
-                result.ErrorMessage = string.Format("ID有误:{0}", ID);
-                result.Success = false;
-                return result;
+                try
+                {
+                    var result = new OperationResult<bool>();
+                    if (ID == Guid.Empty)
+                    {
+                        result.ErrorMessage = string.Format("ID有误:{0}", ID);
+                        result.Success = false;
+                        return result;
+                    }
+                    var model = await _demorepository.FindAsync(ID);
+                    if (model == null)
+                    {
+                        result.ErrorMessage = string.Format("ID有误:{0}", ID);
+                        result.Success = false;
+                    }
+                    else
+                        result.Data = await _demorepository.DeleteAsync(model);
+                    tran.Commit(); //提交事务
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();//回滚事务
+                    throw ex;
+                }
             }
-            var model = await _demorepository.FindAsync(ID);
-            if (model == null)
-            {
-                result.ErrorMessage = string.Format("ID有误:{0}", ID);
-                result.Success = false;
-            }
-            else
-                result.Data = await _demorepository.DeleteAsync(model);
-            return result;
         }
     }
 }

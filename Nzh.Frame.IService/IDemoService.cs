@@ -1,4 +1,5 @@
-﻿using Nzh.Frame.Model;
+﻿
+using Nzh.Frame.Model;
 using Nzh.Frame.Model.Common;
 using Nzh.Frame.Model.ViewModel;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Nzh.Frame.IService
 {
-    public interface IDemoService
+    public interface IDemoService 
     {
         /// <summary>
         /// 获取Demo分页
