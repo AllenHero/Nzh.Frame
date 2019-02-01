@@ -18,8 +18,6 @@ namespace Nzh.Frame.Service
         private readonly IMapper _mapper;
         private readonly IDemoRepository _demorepository;
 
-        //事务
-
         public DemoService(IDemoRepository demorepository, IMapper mapper)
         {
             _demorepository = demorepository;
