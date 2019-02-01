@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Nzh.Frame.IRepository;
 using Nzh.Frame.IService;
 using Nzh.Frame.Model;
 using Nzh.Frame.Model.Common;
 using Nzh.Frame.Model.ViewModel;
 using Nzh.Frame.Repository.EF;
+using Nzh.Frame.Service.Extensions;
 using ReflectionIT.Mvc.Paging;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ namespace Nzh.Frame.Service
         private readonly IMapper _mapper;
         private readonly IDemoRepository _demorepository;
         private readonly EFDbContext _context;
+
 
         public DemoService(IDemoRepository demorepository, IMapper mapper, EFDbContext context)
         {
@@ -65,6 +68,9 @@ namespace Nzh.Frame.Service
             }
             else
                 result.Data = await _demorepository.FindAsync(ID);
+            //result.Data = _context.Demo.FromSql<Demo>("select * from demo").FirstOrDefault(); //执行sql语句
+            //int count = _context.Database.ExecuteSqlCommand("select * from demo"); //执行sql语句
+           // result.Data = DbContextExtensions.SqlQuery("select * from demo");
             return _mapper.Map<OperationResult<ViewDemo>>(result);
         }
 
