@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Nzh.Frame.IRepository;
 using Nzh.Frame.IService;
 using Nzh.Frame.Model;
@@ -69,6 +70,8 @@ namespace Nzh.Frame.Service
                 result.Data = await _demorepository.FindAsync(ID);
             //result.Data = _context.Demo.FromSql<Demo>("select * from demo").FirstOrDefault(); //执行sql语句
             //int count = _context.Database.ExecuteSqlCommand("select * from demo"); //执行sql语句
+            //DatabaseFacade databaseFacade = new DatabaseFacade(_context);
+            //result.Data = DbContextExtensions.SqlQuery<Demo>(databaseFacade, "select * from demo").FirstOrDefault();
             return _mapper.Map<OperationResult<ViewDemo>>(result);
         }
 
