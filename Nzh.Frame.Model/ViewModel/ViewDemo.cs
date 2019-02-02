@@ -24,6 +24,7 @@ namespace Nzh.Frame.Model.ViewModel
         public Guid CreateID { get; set; }
 
         public DateTime UpdateTime { get; set; }
+
         public Guid UpdateID { get; set; }
 
         public DateTime DeleteTime { get; set; }
