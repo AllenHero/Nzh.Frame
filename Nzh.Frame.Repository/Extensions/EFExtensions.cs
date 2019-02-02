@@ -8,9 +8,12 @@ using System.Data.SqlClient;
 using System.Reflection;
 using System.Text;
 
-namespace Nzh.Frame.Service.Extensions
+namespace Nzh.Frame.Repository.Extensions
 {
-    public static  class DbContextExtensions
+    /// <summary>
+    /// EF扩展方法
+    /// </summary>
+    public static class EFExtensions
     {
         private static void CombineParams(ref DbCommand command, params object[] parameters)
         {
