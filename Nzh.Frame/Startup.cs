@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,7 @@ namespace Nzh.Frame
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc();
 
             services.AddDbContext<EFDbContext>(option =>
@@ -50,6 +52,8 @@ namespace Nzh.Frame
             services.AddTransient<IDemoService, DemoService>();
             services.AddAutoMapper();
             services.AddMvc();
+
+            #region  Swagger
 
             services.AddSwaggerGen(c =>
             {
@@ -77,6 +81,8 @@ namespace Nzh.Frame
                // c.OperationFilter<HttpHeaderOperation>(); // 添加httpHeader参数
             });
 
+            #endregion
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -86,31 +92,20 @@ namespace Nzh.Frame
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc();
 
-            //允许跨域访问
-            app.UseCors(builder =>
-               builder.AllowAnyOrigin()
-               .AllowAnyHeader()
-               .AllowAnyMethod());
+            #region Swagger
 
-            // 使中间件能够将生成的swagger作为json端点
             app.UseSwagger();
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-
-            //启用中间件服务swagger-ui，指定json端点
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoAPI V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiHelp V1");
             });
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                name: "default",
-                template: "{controller=Vehicles}/{id?}");
-
-            });
+            #endregion
         }
     }
 }
