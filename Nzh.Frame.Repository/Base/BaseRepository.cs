@@ -841,6 +841,7 @@ namespace Nzh.Frame.Repository.Base
             await Task.Run(() => _context.Database.ExecuteSqlCommand(sql));
         }
 
+
         /// <summary>
         /// 执行带参数的Sql
         /// </summary>
