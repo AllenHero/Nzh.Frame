@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Nzh.Frame.IRepository\Nzh.Frame.IRepository.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.IService\Nzh.Frame.IService.csproj" />
     <ProjectReference Include="..\Nzh.Frame.Model\Nzh.Frame.Model.csproj" />
   </ItemGroup>
 

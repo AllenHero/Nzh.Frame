@@ -18,6 +18,7 @@ using Nzh.Frame.IService;
 using Nzh.Frame.Repository;
 using Nzh.Frame.Repository.EF;
 using Nzh.Frame.Service;
+using Nzh.Frame.Service.Factory;
 using Nzh.Frame.Service.MapperConfig;
 using STD.NetCore.SwaggerHelp;
 using Swashbuckle.AspNetCore.Swagger;
@@ -35,7 +36,6 @@ namespace Nzh.Frame
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc();
 
             services.AddDbContext<EFDbContext>(option =>
@@ -48,9 +48,13 @@ namespace Nzh.Frame
             //config.CreateMapper();
 
             //注入服务、仓储类
-            services.AddTransient<IDemoRepository, DemoRepository>();
-            services.AddTransient<IDemoService, DemoService>();
+            //services.AddTransient<IDemoRepository, DemoRepository>();
+            //services.AddTransient<IDemoService, DemoService>();
+
             services.AddAutoMapper();
+
+            services.AddRepositories();
+
             services.AddMvc();
 
             #region  Swagger
@@ -92,7 +96,7 @@ namespace Nzh.Frame
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc();
