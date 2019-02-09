@@ -19,14 +19,14 @@ namespace Nzh.Frame.IService
         /// <param name="PageSize"></param>
         /// <param name="SortExpression"></param>
         /// <returns></returns>
-        Task<OperationResult<IEnumerable<ViewDemo>>> GetDemoPageAsyncList(string Name, int PageIndex, int PageSize, string SortExpression);
+        Task<OperationResult<IEnumerable<Demo>>> GetDemoPageAsyncList(string Name, int PageIndex, int PageSize, string SortExpression);
 
         /// <summary>
         ///  获取单个Demo
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        Task<OperationResult<ViewDemo>> GetDemoByIDAsync(Guid ID);
+        Task<OperationResult<Demo>> GetDemoByIDAsync(Guid ID);
 
         /// <summary>
         ///  添加Demo

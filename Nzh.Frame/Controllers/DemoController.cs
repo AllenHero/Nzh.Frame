@@ -40,7 +40,7 @@ namespace Nzh.Frame.Controllers
         /// <param name="SortExpression"></param>
         /// <returns></returns>
         [HttpGet("GetDemoPageAsyncList")]
-        public async Task<OperationResult<IEnumerable<ViewDemo>>> GetDemoPageAsyncList(string Name, int? PageIndex, int? PageSize,string SortExpression)
+        public async Task<OperationResult<IEnumerable<Demo>>> GetDemoPageAsyncList(string Name, int? PageIndex, int? PageSize,string SortExpression)
         {
             var startTime = DateTime.Now;
             var result = await _demoservice.GetDemoPageAsyncList(Name, PageIndex ?? 1, PageSize ?? 10, SortExpression);
@@ -56,7 +56,7 @@ namespace Nzh.Frame.Controllers
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpGet("GetDemoByIDAsync")]
-        public async Task<OperationResult<ViewDemo>> GetDemoByIDAsync(Guid ID)
+        public async Task<OperationResult<Demo>> GetDemoByIDAsync(Guid ID)
         {
             var startTime = DateTime.Now;
             var result = await _demoservice.GetDemoByIDAsync(ID);

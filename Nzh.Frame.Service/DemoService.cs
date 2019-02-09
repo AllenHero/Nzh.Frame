@@ -37,7 +37,7 @@ namespace Nzh.Frame.Service
         /// <param name="pageSize"></param>
         /// <param name="SortExpression"></param>
         /// <returns></returns>
-        public async Task<OperationResult<IEnumerable<ViewDemo>>> GetDemoPageAsyncList(string Name, int PageIndex, int PageSize, string SortExpression)
+        public async Task<OperationResult<IEnumerable<Demo>>> GetDemoPageAsyncList(string Name, int PageIndex, int PageSize, string SortExpression)
         {
             string baseSortExpression = "Name";
             var query = _demorepository.GetAllAsIQuerable();
@@ -49,7 +49,7 @@ namespace Nzh.Frame.Service
             {
                 Data = await PagingList.CreateAsync(query, PageSize, PageIndex, SortExpression, baseSortExpression)
             };
-            return _mapper.Map<OperationResult<IEnumerable<Demo>>, OperationResult<IEnumerable<ViewDemo>>>(result);
+            return _mapper.Map<OperationResult<IEnumerable<Demo>>>(result);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Nzh.Frame.Service
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public async Task<OperationResult<ViewDemo>> GetDemoByIDAsync(Guid ID)
+        public async Task<OperationResult<Demo>> GetDemoByIDAsync(Guid ID)
         {
             var result = new OperationResult<Demo>();
             if (ID == Guid.Empty)
@@ -71,7 +71,7 @@ namespace Nzh.Frame.Service
             //int count = _context.Database.ExecuteSqlCommand("select * from demo"); //执行sql语句
             //DatabaseFacade databaseFacade = new DatabaseFacade(_context);
             //result.Data = DbContextExtensions.SqlQuery<Demo>(databaseFacade, "select * from demo").FirstOrDefault();
-            return _mapper.Map<OperationResult<ViewDemo>>(result);
+            return _mapper.Map<OperationResult<Demo>>(result);
         }
 
         /// <summary>

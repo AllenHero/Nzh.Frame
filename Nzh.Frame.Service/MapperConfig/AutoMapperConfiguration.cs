@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Nzh.Frame.Service.MapperConfig
 {
-    public class AutoMapperConfiguration:Profile
+    public class AutoMapperConfiguration : Profile
     {
-        public AutoMapperConfiguration()
-        {
-            CreateMap<Demo, ViewDemo>();
-        }
+        //public AutoMapperConfiguration()
+        //{
+        //    CreateMap<Demo, ViewDemo>();
+        //}
     }
 }

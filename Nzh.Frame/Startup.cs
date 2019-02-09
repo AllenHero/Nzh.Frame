@@ -41,11 +41,11 @@ namespace Nzh.Frame
             services.AddDbContext<EFDbContext>(option =>
                  option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new AutoMapperConfiguration());
-            });
-            config.CreateMapper();
+            //var config = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.AddProfile(new AutoMapperConfiguration());
+            //});
+            //config.CreateMapper();
 
             //注入服务、仓储类
             services.AddTransient<IDemoRepository, DemoRepository>();
