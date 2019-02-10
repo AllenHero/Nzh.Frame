@@ -9,7 +9,6 @@ using Nzh.Frame.Common.Logger;
 using Nzh.Frame.IService;
 using Nzh.Frame.Model;
 using Nzh.Frame.Model.Common;
-using Nzh.Frame.Model.ViewModel;
 
 namespace Nzh.Frame.Controllers
 {
@@ -56,6 +55,7 @@ namespace Nzh.Frame.Controllers
                 result.code = -1;
                 result.msg = ex.Message;
             }
+            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
             return Json(result);
         }
 
@@ -65,9 +65,20 @@ namespace Nzh.Frame.Controllers
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpGet("GetDemoByIDAsync")]
-        public async Task<OperationResult<Demo>> GetDemoByIDAsync(Guid ID)
+        public async Task<JsonResult> GetDemoByIDAsync(Guid ID)
         {
-            return null;
+            var result = new OperationResult<Demo>();
+            try
+            {
+                result.data = await _demoService.GetDemoByIDAsync(ID);
+            }
+            catch (Exception ex)
+            {
+                result.code = -1;
+                result.msg = ex.Message;
+            }
+            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
+            return Json(result);
         }
 
         /// <summary>
@@ -76,9 +87,20 @@ namespace Nzh.Frame.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("AddDemoAsync")]
-        public async Task<OperationResult<bool>> AddDemoAsync([FromBody]Demo model)
+        public async Task<JsonResult> AddDemoAsync([FromBody]Demo model)
         {
-            return null;
+            var result = new OperationResult<bool>();
+            try
+            {
+                result = await _demoService.AddDemoAsync(model);
+            }
+            catch (Exception ex)
+            {
+                result.code = -1;
+                result.msg = ex.Message;
+            }
+            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
+            return Json(result);
         }
 
         /// <summary>
@@ -87,9 +109,20 @@ namespace Nzh.Frame.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("UpdateDemoAsync")]
-        public async Task<OperationResult<bool>> UpdateDemoAsync([FromBody]Demo model)
+        public async Task<JsonResult> UpdateDemoAsync([FromBody]Demo model)
         {
-            return null;
+            var result = new OperationResult<bool>();
+            try
+            {
+                result = await _demoService.UpdateDemoAsync(model);
+            }
+            catch (Exception ex)
+            {
+                result.code = -1;
+                result.msg = ex.Message;
+            }
+            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
+            return Json(result);
         }
 
         /// <summary>
@@ -98,9 +131,20 @@ namespace Nzh.Frame.Controllers
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpDelete("DeleteDemoAsync")]
-        public async Task<OperationResult<bool>> DeleteDemoAsync(Guid ID)
+        public async Task<JsonResult> DeleteDemoAsync(Guid ID)
         {
-            return null;
+            var result = new OperationResult<bool>();
+            try
+            {
+                result = await _demoService.DeleteDemoAsync(ID);
+            }
+            catch (Exception ex)
+            {
+                result.code = -1;
+                result.msg = ex.Message;
+            }
+            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
+            return Json(result);
         }
     }
 }

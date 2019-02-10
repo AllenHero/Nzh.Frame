@@ -4,7 +4,6 @@ using Nzh.Frame.IRepository;
 using Nzh.Frame.IService;
 using Nzh.Frame.Model;
 using Nzh.Frame.Model.Common;
-using Nzh.Frame.Model.ViewModel;
 using Nzh.Frame.Repository.EF;
 using ReflectionIT.Mvc.Paging;
 using System;
@@ -67,9 +66,11 @@ namespace Nzh.Frame.Service
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public async Task<OperationResult<Demo>> GetDemoByIDAsync(Guid ID)
+        public async Task<Demo> GetDemoByIDAsync(Guid ID)
         {
-            return null;
+            var demoInfo = new Demo();
+            demoInfo =await _demoRepository.FindAsync(ID);
+            return demoInfo;
         }
 
         /// <summary>
@@ -79,7 +80,21 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<OperationResult<bool>> AddDemoAsync(Demo model)
         {
-            return null;
+            using (var tran = _context.Database.BeginTransaction())//开始事务
+            {
+                try
+                {
+                    var result = new OperationResult<bool>();
+                    result.data = await _demoRepository.AddAsync(model);
+                    tran.Commit();//提交事务
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();//回滚事务
+                    throw ex;
+                }
+            }
         }
 
         
@@ -91,7 +106,29 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<OperationResult<bool>> UpdateDemoAsync(Demo model)
         {
-            return null;
+            using (var tran = _context.Database.BeginTransaction())//开始事务
+            {
+                try
+                {
+                    var result = new OperationResult<bool>();
+                    var demo = await _demoRepository.FindAsync(model.ID);
+                    if (model != null)
+                    {
+                        demo.Name = model.Name;
+                        demo.Sex = model.Sex;
+                        demo.Age = model.Age;
+                        demo.Remark = model.Remark;
+                        result.data = await _demoRepository.UpdateAsync(demo);
+                        tran.Commit();//提交事务
+                    }
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();//回滚事务
+                    throw ex;
+                }
+            }
         }
 
         /// <summary>
@@ -101,7 +138,25 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<OperationResult<bool>> DeleteDemoAsync(Guid ID)
         {
-            return null;
+            using (var tran = _context.Database.BeginTransaction())//开始事务
+            {
+                try
+                {
+                    var result = new OperationResult<bool>();
+                    var demo = await _demoRepository.FindAsync(ID);
+                    if (demo != null)
+                    {
+                        result.data = await _demoRepository.DeleteAsync(demo);
+                        tran.Commit();//提交事务
+                    }
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();//回滚事务
+                    throw ex;
+                }
+            }
         }
     }
 }

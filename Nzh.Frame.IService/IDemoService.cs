@@ -1,7 +1,6 @@
 ﻿
 using Nzh.Frame.Model;
 using Nzh.Frame.Model.Common;
-using Nzh.Frame.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,7 +25,7 @@ namespace Nzh.Frame.IService
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        Task<OperationResult<Demo>> GetDemoByIDAsync(Guid ID);
+        Task<Demo> GetDemoByIDAsync(Guid ID);
 
         /// <summary>
         ///  添加Demo

@@ -94,12 +94,6 @@
             是否删除
             </summary>
         </member>
-        <member name="T:Nzh.Frame.Model.Common.OperationResult">
-            <summary>
-            操作返回类
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
         <member name="P:Nzh.Frame.Model.Common.PageResult`1.total">
             <summary>
             总记录数
@@ -175,11 +169,6 @@
         <member name="T:Nzh.Frame.Model.Demo">
             <summary>
              Demo
-            </summary>
-        </member>
-        <member name="T:Nzh.Frame.Model.ViewModel.ViewDemo">
-            <summary>
-            ViewDemo 
             </summary>
         </member>
     </members>
