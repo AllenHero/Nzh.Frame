@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Nzh.Frame.IRepository.Base;
-using Nzh.Frame.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Nzh.Frame.Repository.Base
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class, IBaseEntity, new()
+    public class BaseRepository<T> : IBaseRepository<T> where T : class, new()
     {
         private readonly DbContext _context;
 
@@ -313,7 +312,7 @@ namespace Nzh.Frame.Repository.Base
         /// <returns></returns>
         public virtual IQueryable<T> GetAllAsIQuerable()
         {
-            return _context.Set<T>().Where(c => c.IsDelete == 0).AsNoTracking();
+            return _context.Set<T>().AsNoTracking();
         }
 
         /// <summary>
@@ -323,7 +322,7 @@ namespace Nzh.Frame.Repository.Base
         /// <returns></returns>
         public T GetSingle(Guid ID)
         {
-            return _context.Set<T>().FirstOrDefault(x => x.ID == ID);
+            return _context.Set<T>().FirstOrDefault();
         }
 
         /// <summary>

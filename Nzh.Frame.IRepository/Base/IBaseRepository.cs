@@ -1,5 +1,4 @@
-﻿using Nzh.Frame.Model.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nzh.Frame.IRepository.Base
 {
-    public interface IBaseRepository<T> where T : class, IBaseEntity, new()
+    public interface IBaseRepository<T> where T : class, new()
     {
         void Add(T entity);
 

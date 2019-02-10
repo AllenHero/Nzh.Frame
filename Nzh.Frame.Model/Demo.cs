@@ -1,5 +1,4 @@
-﻿using Nzh.Frame.Model.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,8 +7,9 @@ namespace Nzh.Frame.Model
     /// <summary>
     ///  Demo
     /// </summary>
-    public class Demo: BaseEntity
+    public class Demo
     {
+        public Guid ID { get; set; }
 
         public string Name { get; set; }
 
