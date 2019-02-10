@@ -22,7 +22,7 @@
             <param name="Name"></param>
             <param name="PageIndex"></param>
             <param name="PageSize"></param>
-            <param name="Age"></param>
+            <param name="SortExpression"></param>
             <returns></returns>
         </member>
         <member name="M:Nzh.Frame.Controllers.DemoController.GetDemoByIDAsync(System.Guid)">
@@ -39,11 +39,10 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Nzh.Frame.Controllers.DemoController.UpdateDemoAsync(System.Guid,Nzh.Frame.Model.Demo)">
+        <member name="M:Nzh.Frame.Controllers.DemoController.UpdateDemoAsync(Nzh.Frame.Model.Demo)">
             <summary>
             修改Demo
             </summary>
-            <param name="ID"></param>
             <param name="model"></param>
             <returns></returns>
         </member>

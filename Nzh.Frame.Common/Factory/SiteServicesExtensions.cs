@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Nzh.Frame.IRepository;
+using Nzh.Frame.IService;
 using Nzh.Frame.Repository;
+using Nzh.Frame.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Nzh.Frame.IService;
 
-namespace Nzh.Frame.Service.Factory
+namespace Nzh.Frame.Common.Factory
 {
     public static class SiteServicesExtensions
     {

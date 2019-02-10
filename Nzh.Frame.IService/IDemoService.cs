@@ -19,7 +19,7 @@ namespace Nzh.Frame.IService
         /// <param name="PageSize"></param>
         /// <param name="SortExpression"></param>
         /// <returns></returns>
-        Task<OperationResult<IEnumerable<Demo>>> GetDemoPageAsyncList(string Name, int PageIndex, int PageSize, string SortExpression);
+        Task<PageResult<Demo>> GetDemoPageAsyncList(QueryHelper query);
 
         /// <summary>
         ///  获取单个Demo

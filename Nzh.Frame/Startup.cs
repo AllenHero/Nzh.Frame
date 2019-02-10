@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
+//using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +13,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
+using Nzh.Frame.Common.Factory;
 using Nzh.Frame.IRepository;
 using Nzh.Frame.IService;
 using Nzh.Frame.Repository;
 using Nzh.Frame.Repository.EF;
 using Nzh.Frame.Service;
-using Nzh.Frame.Service.Factory;
-using Nzh.Frame.Service.MapperConfig;
 using STD.NetCore.SwaggerHelp;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -51,7 +50,7 @@ namespace Nzh.Frame
             //services.AddTransient<IDemoRepository, DemoRepository>();
             //services.AddTransient<IDemoService, DemoService>();
 
-            services.AddAutoMapper();
+            //services.AddAutoMapper();
 
             services.AddRepositories();
 

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿//using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Nzh.Frame.IRepository;
@@ -18,14 +18,14 @@ namespace Nzh.Frame.Service
 {
     public class DemoService : IDemoService
     {
-        private readonly IMapper _mapper;
-        private readonly IDemoRepository _demorepository;
+        private readonly IDemoRepository _demoRepository;
         private readonly EFDbContext _context;
 
-        public DemoService(IDemoRepository demorepository, IMapper mapper, EFDbContext context)
+        private readonly string DEFAULT_SORT_FIELD = "Age";
+
+        public DemoService(IDemoRepository demoRepository,  EFDbContext context)
         {
-            _demorepository = demorepository;
-            _mapper = mapper;
+            _demoRepository = demoRepository;
             _context = context;
         }
 
@@ -37,19 +37,30 @@ namespace Nzh.Frame.Service
         /// <param name="pageSize"></param>
         /// <param name="SortExpression"></param>
         /// <returns></returns>
-        public async Task<OperationResult<IEnumerable<Demo>>> GetDemoPageAsyncList(string Name, int PageIndex, int PageSize, string SortExpression)
+        public async Task<PageResult<Demo>> GetDemoPageAsyncList(QueryHelper query)
         {
-            string baseSortExpression = "Name";
-            var query = _demorepository.GetAllAsIQuerable();
-            if (!string.IsNullOrWhiteSpace(Name))
-                query = query.Where(c => c.Name == Name);
-            if (string.IsNullOrWhiteSpace(SortExpression))
-                SortExpression = baseSortExpression;
-            var result = new OperationResult<IEnumerable<Demo>>()
+            var demoPage = new PageResult<Demo>();
+            var demoModel = _demoRepository.GetAllAsIQuerable();
+            var sortType = query.sort_type == 2 ? "DESC" : "ASC"; //默认升序（ASC）
+            var sortField = string.Empty;
+            QueryFieldExtension.OrderFieldMapping().TryGetValue(query.sort_field, out sortField);
+            if (string.IsNullOrEmpty(sortField))
             {
-                Data = await PagingList.CreateAsync(query, PageSize, PageIndex, SortExpression, baseSortExpression)
-            };
-            return _mapper.Map<OperationResult<IEnumerable<Demo>>>(result);
+                sortField = DEFAULT_SORT_FIELD; //默认按RankNo排序
+            }
+            var maxPage = demoModel.Count() == 0 ? demoModel.Count() / query.page_size : (demoModel.Count() / query.page_size) + 1;
+            if (query.page_num > maxPage)
+            {
+                query.page_num = maxPage; //超过最大页数默认获取最后一页
+            }
+            demoPage.page_num = query.page_num;
+            demoPage.page_size = query.page_size;
+            demoPage.total = demoModel.Count();
+            if (demoModel.Any())
+            {
+                demoPage.list = await PaginationHelper.SortingAndPaging(demoModel.AsQueryable(), sortField, sortType, query.page_num, query.page_size).ToListAsync();
+            }
+            return demoPage;
         }
 
         /// <summary>
@@ -59,19 +70,7 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<OperationResult<Demo>> GetDemoByIDAsync(Guid ID)
         {
-            var result = new OperationResult<Demo>();
-            if (ID == Guid.Empty)
-            {
-                result.ErrorMessage = string.Format("ID有误:{0}", ID);
-                result.Success = false;
-            }
-            else
-                result.Data = await _demorepository.FindAsync(ID);
-            //result.Data = _context.Demo.FromSql<Demo>("select * from demo").FirstOrDefault(); //执行sql语句
-            //int count = _context.Database.ExecuteSqlCommand("select * from demo"); //执行sql语句
-            //DatabaseFacade databaseFacade = new DatabaseFacade(_context);
-            //result.Data = DbContextExtensions.SqlQuery<Demo>(databaseFacade, "select * from demo").FirstOrDefault();
-            return _mapper.Map<OperationResult<Demo>>(result);
+            return null;
         }
 
         /// <summary>
@@ -81,29 +80,8 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<OperationResult<bool>> AddDemoAsync(Demo model)
         {
-            using (var tran = _context.Database.BeginTransaction())//开始事务
-            {
-                try
-                {
-                    var result = new OperationResult<bool>();
-                    if (model == null)
-                    {
-                        result.ErrorMessage = "参数有误";
-                        result.Success = false;
-                        return result;
-                    }
-                    else
-                        result.Data = await _demorepository.AddAsync(model);
-                        tran.Commit();//提交事务
-                        return result;
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();//回滚事务
-                    throw ex;
-                }
-            }
-         }
+            return null;
+        }
 
         
 
@@ -114,32 +92,7 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<OperationResult<bool>> UpdateDemoAsync(Demo model)
         {
-            using (var tran = _context.Database.BeginTransaction())//开始事务
-            {
-                try
-                {
-                    var result = new OperationResult<bool>();
-                    var demo = await _demorepository.FindAsync(model.ID);
-                    if (model == null)
-                    {
-                        result.ErrorMessage = string.Format("ID有误:{0}", model.ID);
-                        result.Success = false;
-                    }
-                    else
-                        demo.Name = model.Name;
-                        demo.Sex = model.Sex;
-                        demo.Age = model.Age;
-                        demo.Remark = model.Remark;
-                        result.Data = await _demorepository.UpdateAsync(demo);
-                        tran.Commit();//提交事务
-                        return result;
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();//回滚事务
-                    throw ex;
-                }
-            }
+            return null;
         }
 
         /// <summary>
@@ -149,28 +102,7 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<OperationResult<bool>> DeleteDemoAsync(Guid ID)
         {
-            using (var tran = _context.Database.BeginTransaction()) //开始事务
-            {
-                try
-                {
-                    var result = new OperationResult<bool>();
-                    var model = await _demorepository.FindAsync(ID);
-                    if (model == null)
-                    {
-                        result.ErrorMessage = string.Format("ID有误:{0}", ID);
-                        result.Success = false;
-                    }
-                    else
-                        result.Data = await _demorepository.DeleteAsync(model);
-                        tran.Commit(); //提交事务
-                        return result;   
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();//回滚事务
-                    throw ex;
-                }
-            }
+            return null;
         }
     }
 }

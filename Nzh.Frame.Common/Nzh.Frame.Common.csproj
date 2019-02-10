@@ -11,7 +11,15 @@
 
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nzh.Frame.IRepository\Nzh.Frame.IRepository.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.IService\Nzh.Frame.IService.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.Repository\Nzh.Frame.Repository.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.Service\Nzh.Frame.Service.csproj" />
   </ItemGroup>
 
 </Project>

@@ -20,15 +20,15 @@ namespace Nzh.Frame.Controllers
     [Route("api/Demo")]
     public class DemoController : Controller
     {
-        private readonly IDemoService _demoservice;
+        private readonly IDemoService _demoService;
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="demoservice"></param>
-        public DemoController(IDemoService demoservice)
+        public DemoController(IDemoService demoService)
         {
-            _demoservice = demoservice;
+            _demoService = demoService;
         }
 
         /// <summary>
@@ -40,14 +40,23 @@ namespace Nzh.Frame.Controllers
         /// <param name="SortExpression"></param>
         /// <returns></returns>
         [HttpGet("GetDemoPageAsyncList")]
-        public async Task<OperationResult<IEnumerable<Demo>>> GetDemoPageAsyncList(string Name, int? PageIndex, int? PageSize,string SortExpression)
+        public async Task<JsonResult> GetDemoPageAsyncList(QueryHelper query)
         {
-            var startTime = DateTime.Now;
-            var result = await _demoservice.GetDemoPageAsyncList(Name, PageIndex ?? 1, PageSize ?? 10, SortExpression);
-            TimeSpan ts = DateTime.Now - startTime;
-            result.TimeSpan = ts.TotalSeconds.ToString("F3");
-            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
-            return result;
+            var result = new OperationResult<PageResult<Demo>>();
+            try
+            {
+                //判断page_size是否在0-100之间，超出范围则默认为20。
+                query.page_size = query.page_size > 0 && query.page_size <= 100 ? query.page_size : 20;
+                //判断page_size是否大于0，超出范围则默认为1。
+                query.page_num = query.page_num > 0 ? query.page_num : 1;
+                result.data = await _demoService.GetDemoPageAsyncList(query);
+            }
+            catch (System.Exception ex)
+            {
+                result.code = -1;
+                result.msg = ex.Message;
+            }
+            return Json(result);
         }
 
         /// <summary>
@@ -58,12 +67,7 @@ namespace Nzh.Frame.Controllers
         [HttpGet("GetDemoByIDAsync")]
         public async Task<OperationResult<Demo>> GetDemoByIDAsync(Guid ID)
         {
-            var startTime = DateTime.Now;
-            var result = await _demoservice.GetDemoByIDAsync(ID);
-            TimeSpan ts = DateTime.Now - startTime;
-            result.TimeSpan = ts.TotalSeconds.ToString("F3");
-            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
-            return result;
+            return null;
         }
 
         /// <summary>
@@ -74,12 +78,7 @@ namespace Nzh.Frame.Controllers
         [HttpPost("AddDemoAsync")]
         public async Task<OperationResult<bool>> AddDemoAsync([FromBody]Demo model)
         {
-            var startTime = DateTime.Now;
-            var result = await _demoservice.AddDemoAsync(model);
-            TimeSpan ts = DateTime.Now - startTime;
-            result.TimeSpan = ts.TotalSeconds.ToString("F3");
-            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
-            return result;
+            return null;
         }
 
         /// <summary>
@@ -90,19 +89,7 @@ namespace Nzh.Frame.Controllers
         [HttpPut("UpdateDemoAsync")]
         public async Task<OperationResult<bool>> UpdateDemoAsync([FromBody]Demo model)
         {
-            var result = new OperationResult<bool>();
-            var startTime = DateTime.Now;
-            if (model.ID==Guid.Empty)
-            {
-                result.Success = false;
-                result.ErrorMessage = "ID参数有误";
-            }
-            else
-                result = await _demoservice.UpdateDemoAsync(model);
-            TimeSpan ts = DateTime.Now - startTime;
-            result.TimeSpan = ts.TotalSeconds.ToString("F3");
-            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
-            return result;
+            return null;
         }
 
         /// <summary>
@@ -113,12 +100,7 @@ namespace Nzh.Frame.Controllers
         [HttpDelete("DeleteDemoAsync")]
         public async Task<OperationResult<bool>> DeleteDemoAsync(Guid ID)
         {
-            var startTime = DateTime.Now;
-            var result = await _demoservice.DeleteDemoAsync(ID);
-            TimeSpan ts = DateTime.Now - startTime;
-            result.TimeSpan = ts.TotalSeconds.ToString("F3");
-            Logger.Info(JsonConvert.SerializeObject(result)); //此处调用日志记录函数记录日志
-            return result;
+            return null;
         }
     }
 }
