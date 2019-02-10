@@ -4,8 +4,15 @@ using System.Text;
 
 namespace Nzh.Frame.Model.Common
 {
+    /// <summary>
+    ///  分页返回类
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class PageResult<T>
     {
+        /// <summary>
+        ///  分页返回类
+        /// </summary>
         public PageResult()
         {
         }

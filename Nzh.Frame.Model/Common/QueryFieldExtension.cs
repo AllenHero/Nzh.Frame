@@ -4,10 +4,17 @@ using System.Text;
 
 namespace Nzh.Frame.Model.Common
 {
+    /// <summary>
+    /// 查询扩展类
+    /// </summary>
     public static class QueryFieldExtension
     {
         private static Dictionary<string, string> dicItems;
 
+        /// <summary>
+        /// 排序字典
+        /// </summary>
+        /// <returns></returns>
         public static Dictionary<string, string> OrderFieldMapping()
         {
             dicItems = new Dictionary<string, string>();
@@ -37,6 +44,10 @@ namespace Nzh.Frame.Model.Common
             return dicItems;
         }
 
+        /// <summary>
+        /// 语言字典
+        /// </summary>
+        /// <returns></returns>
         public static Dictionary<string, string> LanguageMapping()
         {
             dicItems = new Dictionary<string, string>();

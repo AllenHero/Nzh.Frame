@@ -24,19 +24,16 @@ namespace Nzh.Frame.Controllers
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="demoservice"></param>
+        /// <param name="demoService"></param>
         public DemoController(IDemoService demoService)
         {
             _demoService = demoService;
         }
 
         /// <summary>
-        /// 获取Demo分页
+        /// Demo分页
         /// </summary>
-        /// <param name="Name"></param>
-        /// <param name="PageIndex"></param>
-        /// <param name="PageSize"></param>
-        /// <param name="SortExpression"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet("GetDemoPageAsyncList")]
         public async Task<JsonResult> GetDemoPageAsyncList(QueryHelper query)

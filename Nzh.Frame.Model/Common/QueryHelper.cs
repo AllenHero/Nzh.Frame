@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Nzh.Frame.Model.Common
 {
+    /// <summary>
+    /// 查询辅助类
+    /// </summary>
     public class QueryHelper
     {
         /// <summary>

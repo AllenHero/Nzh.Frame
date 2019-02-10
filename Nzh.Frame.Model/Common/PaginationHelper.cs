@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Nzh.Frame.Model.Common
 {
+    /// <summary>
+    /// 分页
+    /// </summary>
     public static class PaginationHelper
     {
         /// <summary>
