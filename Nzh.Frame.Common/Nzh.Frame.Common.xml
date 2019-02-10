@@ -4,6 +4,13 @@
         <name>Nzh.Frame.Common</name>
     </assembly>
     <members>
+        <member name="M:Nzh.Frame.Common.Factory.SiteServicesExtensions.AddRepositories(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注入服务、仓储类
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="T:Nzh.Frame.Common.Helper.CsvHelper">
             <summary>
             Csv辅助类 

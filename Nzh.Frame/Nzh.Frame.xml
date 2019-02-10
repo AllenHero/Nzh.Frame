@@ -15,7 +15,7 @@
             </summary>
             <param name="demoservice"></param>
         </member>
-        <member name="M:Nzh.Frame.Controllers.DemoController.GetDemoPageAsyncList(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+        <member name="M:Nzh.Frame.Controllers.DemoController.GetDemoPageAsyncList(Nzh.Frame.Model.Common.QueryHelper)">
             <summary>
             获取Demo分页
             </summary>

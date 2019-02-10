@@ -28,11 +28,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Nzh.Frame.Common\Nzh.Frame.Common.csproj" />
-    <ProjectReference Include="..\Nzh.Frame.IRepository\Nzh.Frame.IRepository.csproj" />
     <ProjectReference Include="..\Nzh.Frame.IService\Nzh.Frame.IService.csproj" />
     <ProjectReference Include="..\Nzh.Frame.Model\Nzh.Frame.Model.csproj" />
-    <ProjectReference Include="..\Nzh.Frame.Repository\Nzh.Frame.Repository.csproj" />
-    <ProjectReference Include="..\Nzh.Frame.Service\Nzh.Frame.Service.csproj" />
   </ItemGroup>
 
 </Project>

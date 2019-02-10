@@ -94,11 +94,83 @@
             是否删除
             </summary>
         </member>
-        <member name="T:Nzh.Frame.Model.Common.OperationResult`1">
+        <member name="T:Nzh.Frame.Model.Common.OperationResult">
             <summary>
             操作返回类
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Nzh.Frame.Model.Common.PageResult`1.total">
+            <summary>
+            总记录数
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Common.PageResult`1.page_size">
+            <summary>
+            一页展示的条数
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Common.PageResult`1.page_num">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Common.PageResult`1.list">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="M:Nzh.Frame.Model.Common.PaginationHelper.DataSorting``1(System.Linq.IQueryable{``0},System.String,System.String)">
+            <summary>
+            排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">元数据</param>
+            <param name="sortExpression">排序的字段</param>
+            <param name="sortDirection">排序方式：ASC， DESC</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nzh.Frame.Model.Common.PaginationHelper.GetPageList``1(System.Linq.IQueryable{``0},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            分页查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">源数据</param>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页显示的数量</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nzh.Frame.Model.Common.PaginationHelper.SortingAndPaging``1(System.Linq.IQueryable{``0},System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            获取分页数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">源数据</param>
+            <param name="sortExpression">排序字段</param>
+            <param name="sortDirection">排序方式</param>
+            <param name="pageNumber">页码</param>
+            <param name="pageSize">每页显示的数量</param>
+            <returns></returns>
+        </member>
+        <member name="P:Nzh.Frame.Model.Common.QueryHelper.sort_field">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Common.QueryHelper.sort_type">
+            <summary>
+            排序方式 1: ASC(升序) 或 2: DESC(降序)
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Common.QueryHelper.page_num">
+            <summary>
+            分页起始页
+            </summary>
+        </member>
+        <member name="P:Nzh.Frame.Model.Common.QueryHelper.page_size">
+            <summary>
+            每页显示的条数
+            </summary>
         </member>
         <member name="T:Nzh.Frame.Model.Demo">
             <summary>

@@ -1,5 +1,4 @@
-﻿//using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Nzh.Frame.IRepository;
 using Nzh.Frame.IService;
