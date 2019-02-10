@@ -45,6 +45,10 @@ namespace Nzh.Frame.Service
             {
                 sortField = DEFAULT_SORT_FIELD; //默认按RankNo排序
             }
+            //判断page_size是否在0-100之间，超出范围则默认为20。
+            query.page_size = query.page_size > 0 && query.page_size <= 100 ? query.page_size : 20;
+            //判断page_size是否大于0，超出范围则默认为1。
+            query.page_num = query.page_num > 0 ? query.page_num : 1;
             var maxPage = demoModel.Count() == 0 ? demoModel.Count() / query.page_size : (demoModel.Count() / query.page_size) + 1;
             if (query.page_num > maxPage)
             {

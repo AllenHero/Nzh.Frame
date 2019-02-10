@@ -44,10 +44,6 @@ namespace Nzh.Frame.Controllers
             var result = new OperationResult<PageResult<Demo>>();
             try
             {
-                //判断page_size是否在0-100之间，超出范围则默认为20。
-                query.page_size = query.page_size > 0 && query.page_size <= 100 ? query.page_size : 20;
-                //判断page_size是否大于0，超出范围则默认为1。
-                query.page_num = query.page_num > 0 ? query.page_num : 1;
                 result.data = await _demoService.GetDemoPageAsyncList(query);
             }
             catch (System.Exception ex)
