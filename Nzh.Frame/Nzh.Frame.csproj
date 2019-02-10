@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Nzh.Frame.Common\Nzh.Frame.Common.csproj" />
+    <ProjectReference Include="..\Nzh.Frame.Extension\Nzh.Frame.Extension.csproj" />
     <ProjectReference Include="..\Nzh.Frame.IService\Nzh.Frame.IService.csproj" />
     <ProjectReference Include="..\Nzh.Frame.Model\Nzh.Frame.Model.csproj" />
   </ItemGroup>

@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Nzh.Frame.Common.Factory
+namespace Nzh.Frame.Extension
 {
     public static class SiteServicesExtensions
     {
@@ -25,7 +25,6 @@ namespace Nzh.Frame.Common.Factory
             services.AddScoped<IDemoService, DemoService>();
 
             return services;
-
         }
     }
 }

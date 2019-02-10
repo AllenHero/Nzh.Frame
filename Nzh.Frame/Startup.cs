@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
-using Nzh.Frame.Common.Factory;
+using Nzh.Frame.Extension;
 using Nzh.Frame.IRepository;
 using Nzh.Frame.IService;
 using Nzh.Frame.Repository;

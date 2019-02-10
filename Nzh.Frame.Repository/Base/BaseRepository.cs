@@ -828,7 +828,7 @@ namespace Nzh.Frame.Repository.Base
 
         #endregion
 
-        #region  Sql
+        #region  EF扩展方法
 
         /// <summary>
         /// 执行Sql
