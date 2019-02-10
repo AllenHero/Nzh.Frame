@@ -10,8 +10,4 @@
     <ProjectReference Include="..\Nzh.Frame.Repository\Nzh.Frame.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="ReflectionIT.Mvc.Paging" Version="2.4.0" />
-  </ItemGroup>
-
 </Project>
