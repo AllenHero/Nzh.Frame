@@ -33,7 +33,7 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<PageResult<Demo>> GetDemoPageAsyncList(QueryHelper query)
         {
-            var demoPage = new PageResult<Demo>();
+            var demoList = new PageResult<Demo>();
             var demoModel = _demoRepository.GetAllAsIQuerable();
             var sortType = query.sort_type == 2 ? "DESC" : "ASC"; //默认升序（ASC）
             var sortField = string.Empty;
@@ -51,14 +51,14 @@ namespace Nzh.Frame.Service
             {
                 query.page_num = maxPage; //超过最大页数默认获取最后一页
             }
-            demoPage.page_num = query.page_num;
-            demoPage.page_size = query.page_size;
-            demoPage.total = demoModel.Count();
+            demoList.page_num = query.page_num;
+            demoList.page_size = query.page_size;
+            demoList.total = demoModel.Count();
             if (demoModel.Any())
             {
-                demoPage.list = await PaginationHelper.SortingAndPaging(demoModel.AsQueryable(), sortField, sortType, query.page_num, query.page_size).ToListAsync();
+                demoList.list = await PaginationHelper.SortingAndPaging(demoModel.AsQueryable(), sortField, sortType, query.page_num, query.page_size).ToListAsync();
             }
-            return demoPage;
+            return demoList;
         }
 
         /// <summary>
@@ -68,9 +68,8 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<Demo> GetDemoByIDAsync(Guid ID)
         {
-            var demoInfo = new Demo();
-            demoInfo =await _demoRepository.FindAsync(ID);
-            return demoInfo;
+           var demoModel = await _demoRepository.FindAsync(ID);
+            return demoModel;
         }
 
         /// <summary>
