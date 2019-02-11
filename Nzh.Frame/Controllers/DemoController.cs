@@ -33,15 +33,18 @@ namespace Nzh.Frame.Controllers
         /// <summary>
         /// 获取Demo分页
         /// </summary>
-        /// <param name="query"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="PageSize"></param>
+        /// <param name="SortField"></param>
+        /// <param name="SortType"></param>
         /// <returns></returns>
         [HttpGet("GetDemoPageAsyncList")]
-        public async Task<JsonResult> GetDemoPageAsyncList(QueryHelper query)
+        public async Task<JsonResult> GetDemoPageAsyncList(int PageIndex, int PageSize,string SortField ,string SortType)
         {
             var result = new OperationResult<PageResult<Demo>>();
             try
             {
-                result.data = await _demoService.GetDemoPageAsyncList(query);
+                result.data = await _demoService.GetDemoPageAsyncList(PageIndex, PageSize, SortField, SortType);
             }
             catch (System.Exception ex)
             {

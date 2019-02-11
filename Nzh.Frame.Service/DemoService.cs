@@ -27,36 +27,28 @@ namespace Nzh.Frame.Service
         }
 
         /// <summary>
-        ///  获取Demo分页
+        /// 获取Demo分页
         /// </summary>
-        /// <param name="query"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="PageSize"></param>
+        /// <param name="SortField"></param>
+        /// <param name="SortType"></param>
         /// <returns></returns>
-        public async Task<PageResult<Demo>> GetDemoPageAsyncList(QueryHelper query)
+        public async Task<PageResult<Demo>> GetDemoPageAsyncList(int PageIndex, int PageSize, string SortField, string SortType)
         {
             var demoList = new PageResult<Demo>();
             var demoModel = _demoRepository.GetAllAsIQuerable();
-            var sortType = query.sort_type == 2 ? "DESC" : "ASC"; //默认升序（ASC）
-            var sortField = string.Empty;
-            QueryFieldExtension.OrderFieldMapping().TryGetValue(query.sort_field, out sortField);
-            if (string.IsNullOrEmpty(sortField))
+            var MaxPage = demoModel.Count() == 0 ? demoModel.Count() / PageSize : (demoModel.Count() / PageSize) + 1;
+            if (PageIndex > MaxPage)
             {
-                sortField = DEFAULT_SORT_FIELD; //默认按RankNo排序
+                PageIndex = MaxPage; //超过最大页数默认获取最后一页
             }
-            //判断page_size是否在0-100之间，超出范围则默认为20。
-            query.page_size = query.page_size > 0 && query.page_size <= 100 ? query.page_size : 20;
-            //判断page_size是否大于0，超出范围则默认为1。
-            query.page_num = query.page_num > 0 ? query.page_num : 1;
-            var maxPage = demoModel.Count() == 0 ? demoModel.Count() / query.page_size : (demoModel.Count() / query.page_size) + 1;
-            if (query.page_num > maxPage)
-            {
-                query.page_num = maxPage; //超过最大页数默认获取最后一页
-            }
-            demoList.page_num = query.page_num;
-            demoList.page_size = query.page_size;
-            demoList.total = demoModel.Count();
+            demoList.PageIndex = PageIndex;
+            demoList.PageSize = PageSize;
+            demoList.TotalCount = demoModel.Count();
             if (demoModel.Any())
             {
-                demoList.list = await PaginationHelper.SortingAndPaging(demoModel.AsQueryable(), sortField, sortType, query.page_num, query.page_size).ToListAsync();
+                demoList.list = await PaginationHelper.SortingAndPaging(demoModel.AsQueryable(), SortField, SortType, PageIndex, PageSize).ToListAsync();
             }
             return demoList;
         }

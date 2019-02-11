@@ -20,17 +20,17 @@ namespace Nzh.Frame.Model.Common
         /// <summary>
         /// 总记录数
         /// </summary>
-        public int total { get; set; }
+        public int TotalCount { get; set; }
 
         /// <summary>
         /// 一页展示的条数
         /// </summary>
-        public int page_size { get; set; }
+        public int PageSize { get; set; }
 
         /// <summary>
         /// 当前页
         /// </summary>
-        public int page_num { get; set; }
+        public int PageIndex { get; set; }
 
         /// <summary>
         /// 内容

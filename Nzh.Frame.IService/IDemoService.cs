@@ -13,9 +13,12 @@ namespace Nzh.Frame.IService
         /// <summary>
         /// 获取Demo分页
         /// </summary>
-        /// <param name="query"></param>
+        /// <param name="PageIndex"></param>
+        /// <param name="PageSize"></param>
+        /// <param name="SortField"></param>
+        /// <param name="SortType"></param>
         /// <returns></returns>
-        Task<PageResult<Demo>> GetDemoPageAsyncList(QueryHelper query);
+        Task<PageResult<Demo>> GetDemoPageAsyncList(int PageIndex, int PageSize, string SortField, string SortType);
 
         /// <summary>
         ///  获取Demo
