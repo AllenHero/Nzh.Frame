@@ -55,6 +55,8 @@ namespace Nzh.Frame.IRepository.Base
 
         int Count(Expression<Func<T, bool>> predicate);
 
+        Task<int> CountAsync(Expression<Func<T, bool>> predicate);
+
         IEnumerable<T> GetAll();
 
         Task<IEnumerable<T>> GetAllAsync();
@@ -62,6 +64,8 @@ namespace Nzh.Frame.IRepository.Base
         IQueryable<T> GetAllAsIQuerable();
 
         T GetSingle(Guid ID);
+
+        Task<T> GetSingleAsync(Guid ID);
 
         T GetSingle(Expression<Func<T, bool>> predicate);
 
@@ -73,7 +77,7 @@ namespace Nzh.Frame.IRepository.Base
 
         int Commit();
 
-        Task<bool> CommitAsync();
+        Task<int> CommitAsync();
 
         Task<List<T>> Query(int pageIndex, int pageSize);
 

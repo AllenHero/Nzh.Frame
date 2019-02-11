@@ -289,6 +289,16 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 返回数量
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public async Task<int> CountAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().CountAsync(predicate);
+        }
+
+        /// <summary>
         /// 返回List
         /// </summary>
         /// <returns></returns>
@@ -323,6 +333,16 @@ namespace Nzh.Frame.Repository.Base
         public T GetSingle(Guid ID)
         {
             return _context.Set<T>().FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 根据ID获取实体
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public async Task<T> GetSingleAsync(Guid ID)
+        {
+            return await _context.Set<T>().FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -387,12 +407,12 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
-        ///  提交
+        /// 提交
         /// </summary>
         /// <returns></returns>
-        public virtual async Task<bool> CommitAsync()
+        public virtual async Task<int> CommitAsync()
         {
-            return await _context.SaveChangesAsync() > 0;
+            return await _context.SaveChangesAsync();
         }
 
         /// <summary>
@@ -839,7 +859,6 @@ namespace Nzh.Frame.Repository.Base
         {
             await Task.Run(() => _context.Database.ExecuteSqlCommand(sql));
         }
-
 
         /// <summary>
         /// 执行带参数的Sql
