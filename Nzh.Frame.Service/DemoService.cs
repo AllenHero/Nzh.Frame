@@ -29,10 +29,7 @@ namespace Nzh.Frame.Service
         /// <summary>
         ///  获取Demo分页
         /// </summary>
-        /// <param name="Name"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="SortExpression"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
         public async Task<PageResult<Demo>> GetDemoPageAsyncList(QueryHelper query)
         {
@@ -65,7 +62,7 @@ namespace Nzh.Frame.Service
         }
 
         /// <summary>
-        /// 获取单个Demo
+        /// 获取Demo
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
@@ -79,14 +76,23 @@ namespace Nzh.Frame.Service
         /// <summary>
         /// 添加Demo
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="Name"></param>
+        /// <param name="Sex"></param>
+        /// <param name="Age"></param>
+        /// <param name="Remark"></param>
         /// <returns></returns>
-        public async Task<OperationResult<bool>> AddDemoAsync(Demo model)
+        public async Task<OperationResult<bool>> AddDemoAsync(string Name, string Sex, int Age, string Remark)
         {
             using (var tran = _context.Database.BeginTransaction())//开始事务
             {
                 try
                 {
+                    Demo model = new Demo();
+                    model.ID = Guid.NewGuid();
+                    model.Name = Name;
+                    model.Sex = Sex;
+                    model.Age = Age;
+                    model.Remark = Remark;
                     var result = new OperationResult<bool>();
                     result.data = await _demoRepository.AddAsync(model);
                     tran.Commit();//提交事务
@@ -100,27 +106,29 @@ namespace Nzh.Frame.Service
             }
         }
 
-        
-
-        /// <summary>
-        /// 修改Demo
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public async Task<OperationResult<bool>> UpdateDemoAsync(Demo model)
+       /// <summary>
+       /// 修改Demo
+       /// </summary>
+       /// <param name="ID"></param>
+       /// <param name="Name"></param>
+       /// <param name="Sex"></param>
+       /// <param name="Age"></param>
+       /// <param name="Remark"></param>
+       /// <returns></returns>
+        public async Task<OperationResult<bool>> UpdateDemoAsync(Guid ID, string Name, string Sex, int Age, string Remark)
         {
             using (var tran = _context.Database.BeginTransaction())//开始事务
             {
                 try
                 {
                     var result = new OperationResult<bool>();
-                    var demo = await _demoRepository.FindAsync(model.ID);
-                    if (model != null)
+                    var demo = await _demoRepository.FindAsync(ID);
+                    if (demo != null)
                     {
-                        demo.Name = model.Name;
-                        demo.Sex = model.Sex;
-                        demo.Age = model.Age;
-                        demo.Remark = model.Remark;
+                        demo.Name = Name;
+                        demo.Sex = Sex;
+                        demo.Age = Age;
+                        demo.Remark = Remark;
                         result.data = await _demoRepository.UpdateAsync(demo);
                         tran.Commit();//提交事务
                     }

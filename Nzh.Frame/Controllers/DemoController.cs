@@ -31,7 +31,7 @@ namespace Nzh.Frame.Controllers
         }
 
         /// <summary>
-        /// Demo分页
+        /// 获取Demo分页
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -53,7 +53,7 @@ namespace Nzh.Frame.Controllers
         }
 
         /// <summary>
-        ///  获取单个Demo
+        ///  获取Demo
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
@@ -75,17 +75,20 @@ namespace Nzh.Frame.Controllers
         }
 
         /// <summary>
-        /// 新增Demo
+        /// 添加Demo
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="Name"></param>
+        /// <param name="Sex"></param>
+        /// <param name="Age"></param>
+        /// <param name="Remark"></param>
         /// <returns></returns>
         [HttpPost("AddDemoAsync")]
-        public async Task<JsonResult> AddDemoAsync([FromBody]Demo model)
+        public async Task<JsonResult> AddDemoAsync(string Name, string Sex, int Age, string Remark)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result = await _demoService.AddDemoAsync(model);
+                result = await _demoService.AddDemoAsync(Name, Sex, Age, Remark);
             }
             catch (Exception ex)
             {
@@ -99,15 +102,19 @@ namespace Nzh.Frame.Controllers
         /// <summary>
         /// 修改Demo
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="ID"></param>
+        /// <param name="Name"></param>
+        /// <param name="Sex"></param>
+        /// <param name="Age"></param>
+        /// <param name="Remark"></param>
         /// <returns></returns>
         [HttpPut("UpdateDemoAsync")]
-        public async Task<JsonResult> UpdateDemoAsync([FromBody]Demo model)
+        public async Task<JsonResult> UpdateDemoAsync(Guid ID, string Name, string Sex, int Age, string Remark)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result = await _demoService.UpdateDemoAsync(model);
+                result = await _demoService.UpdateDemoAsync(ID, Name, Sex, Age, Remark);
             }
             catch (Exception ex)
             {
