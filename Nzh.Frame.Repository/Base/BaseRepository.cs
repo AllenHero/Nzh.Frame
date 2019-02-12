@@ -62,16 +62,6 @@ namespace Nzh.Frame.Repository.Base
         /// 批量添加
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void AddRange(T[] entity)
-        {
-            EntityEntry dbEntityEntry = _context.Entry(entity);
-            _context.Set<T>().AddRange(entity);
-        }
-
-        /// <summary>
-        /// 批量添加
-        /// </summary>
-        /// <param name="entity"></param>
         /// <returns></returns>
         public virtual async Task<bool> AddRangeAsync(IEnumerable<T> entity)
         {
@@ -80,6 +70,19 @@ namespace Nzh.Frame.Repository.Base
             return await _context.SaveChangesAsync() >= 1;
         }
 
+
+
+        /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <param name="entity"></param>
+        public virtual void AddRange(T[] entity)
+        {
+            EntityEntry dbEntityEntry = _context.Entry(entity);
+            _context.Set<T>().AddRange(entity);
+        }
+
+       
         /// <summary>
         /// 批量添加
         /// </summary>
@@ -159,6 +162,17 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="entity"></param>
+        public virtual async Task<bool> RemoveAsync(T entity)
+        {
+            EntityEntry dbEntityEntry = _context.Entry(entity);
+            _context.Set<T>().Remove(entity);
+            return await _context.SaveChangesAsync() >= 1;
+        }
+
+        /// <summary>
         /// 批量删除
         /// </summary>
         /// <param name="entity"></param>
@@ -172,10 +186,32 @@ namespace Nzh.Frame.Repository.Base
         /// 批量删除
         /// </summary>
         /// <param name="entity"></param>
+        public virtual async Task<bool> RemoveRangeAsync(IEnumerable<T> entity)
+        {
+            EntityEntry dbEntityEntry = _context.Entry(entity);
+            _context.Set<T>().RemoveRange(entity);
+            return await _context.SaveChangesAsync() >= 1;
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="entity"></param>
         public virtual void RemoveRange(T[] entity)
         {
             EntityEntry dbEntityEntry = _context.Entry(entity);
             _context.Set<T>().RemoveRange(entity);
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="entity"></param>
+        public virtual async Task<bool> RemoveRangeAsync(T[] entity)
+        {
+            EntityEntry dbEntityEntry = _context.Entry(entity);
+            _context.Set<T>().RemoveRange(entity);
+            return await _context.SaveChangesAsync() >= 1;
         }
 
         #endregion
@@ -215,6 +251,17 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="entity"></param>
+        public virtual async Task<bool> EditAsync(T entity)
+        {
+            EntityEntry dbEntityEntry = _context.Entry(entity);
+            _context.Set<T>().Update(entity);
+            return await _context.SaveChangesAsync() >= 1;
+        }
+
+        /// <summary>
         /// 批量修改
         /// </summary>
         /// <param name="entity"></param>
@@ -228,10 +275,32 @@ namespace Nzh.Frame.Repository.Base
         /// 批量修改
         /// </summary>
         /// <param name="entity"></param>
+        public virtual async Task<bool> EditRangeAsync(IEnumerable<T> entity)
+        {
+            EntityEntry dbEntityEntry = _context.Entry(entity);
+            _context.Set<T>().UpdateRange(entity);
+            return await _context.SaveChangesAsync() >= 1;
+        }
+
+        /// <summary>
+        /// 批量修改
+        /// </summary>
+        /// <param name="entity"></param>
         public virtual void EditRange(T[] entity)
         {
             EntityEntry dbEntityEntry = _context.Entry(entity);
             _context.Set<T>().UpdateRange(entity);
+        }
+
+        /// <summary>
+        /// 批量修改
+        /// </summary>
+        /// <param name="entity"></param>
+        public virtual async Task<bool> EditRangeAsync(T[] entity)
+        {
+            EntityEntry dbEntityEntry = _context.Entry(entity);
+            _context.Set<T>().UpdateRange(entity);
+            return await _context.SaveChangesAsync() >= 1;
         }
 
         #endregion
@@ -323,6 +392,15 @@ namespace Nzh.Frame.Repository.Base
         public virtual IQueryable<T> GetAllAsIQuerable()
         {
             return _context.Set<T>().AsNoTracking();
+        }
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <returns></returns>
+        public virtual async Task<IQueryable<T>> GetAllAsIQuerableAsync()
+        {
+            return await Task.Run(() => _context.Set<T>().AsNoTracking());
         }
 
         /// <summary>
@@ -421,9 +499,20 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async Task<List<T>> Query(int pageIndex, int pageSize)
+        public async Task<List<T>> QueryAsync(int pageIndex, int pageSize)
         {
             return await Task.Run(() => GetObjectSet().Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList());
+        }
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public List<T> Query(int pageIndex, int pageSize)
+        {
+            return GetObjectSet().Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList();
         }
 
         /// <summary>
@@ -431,9 +520,19 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        public async Task<List<T>> Query(Expression<Func<T, bool>> where)
+        public async Task<List<T>> QueryAsync(Expression<Func<T, bool>> where)
         {
             return await Task.Run(() => GetObjectSet().Where(where).ToList());
+        }
+
+        /// <summary>
+        /// 根据条件查询
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        public List<T> Query(Expression<Func<T, bool>> where)
+        {
+            return  GetObjectSet().Where(where).ToList();
         }
 
         /// <summary>
@@ -443,7 +542,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async Task<Tuple<List<T>, int>> Query(Expression<Func<T, bool>> where, int pageIndex, int pageSize)
+        public async Task<Tuple<List<T>, int>> QueryAsync(Expression<Func<T, bool>> where, int pageIndex, int pageSize)
         {
             return await Task.Run(() =>
             {
@@ -456,6 +555,22 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public Tuple<List<T>, int> Query(Expression<Func<T, bool>> where, int pageIndex, int pageSize)
+        {
+            var list = GetObjectSet();
+            if (where != null)
+                list = GetObjectSet().Where(where);
+            list = list.Skip(pageSize * (pageIndex - 1)).Take(pageSize);
+            return new Tuple<List<T>, int>(list.ToList(), list.Count());
+        }
+
+        /// <summary>
         /// 返回List
         /// </summary>
         /// <typeparam name="A"></typeparam>
@@ -463,7 +578,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="orderBy1"></param>
         /// <param name="isAsc"></param>
         /// <returns></returns>
-        public async Task<List<T>> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, bool isAsc)
+        public async Task<List<T>> QueryAsync<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, bool isAsc)
         {
             return await Task.Run(() =>
             {
@@ -479,6 +594,26 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 返回List
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="orderBy1"></param>
+        /// <param name="isAsc"></param>
+        /// <returns></returns>
+        public List<T> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, bool isAsc)
+        {
+            if (isAsc)
+            {
+                return GetObjectSet().Where(where).OrderBy(orderBy1).ToList();
+            }
+            else
+            {
+                return GetObjectSet().Where(where).OrderByDescending(orderBy1).ToList();
+            }
+        }
+
+        /// <summary>
         /// 分页
         /// </summary>
         /// <typeparam name="A"></typeparam>
@@ -488,7 +623,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async Task<Tuple<List<T>, int>> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, bool isAsc, int pageIndex, int pageSize)
+        public async Task<Tuple<List<T>, int>> QueryAsync<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, bool isAsc, int pageIndex, int pageSize)
         {
             return await Task.Run(() =>
             {
@@ -504,6 +639,28 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 分页
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="orderBy1"></param>
+        /// <param name="isAsc"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public Tuple<List<T>, int> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, bool isAsc, int pageIndex, int pageSize)
+        {
+            if (isAsc)
+            {
+                return new Tuple<List<T>, int>(GetObjectSet().Where(where).OrderBy(orderBy1).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), GetObjectSet().Where(where).Count());
+            }
+            else
+            {
+                return new Tuple<List<T>, int>(GetObjectSet().Where(where).OrderByDescending(orderBy1).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), GetObjectSet().Where(where).Count());
+            }
+        }
+
+        /// <summary>
         /// 返回List
         /// </summary>
         /// <typeparam name="A"></typeparam>
@@ -512,7 +669,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="orderBy2"></param>
         /// <param name="isAsc"></param>
         /// <returns></returns>
-        public async Task<List<T>> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, A>> orderBy2, bool isAsc)
+        public async Task<List<T>> QueryAsync<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, A>> orderBy2, bool isAsc)
         {
             return await Task.Run(() =>
             {
@@ -551,6 +708,50 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 返回List
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="orderBy1"></param>
+        /// <param name="orderBy2"></param>
+        /// <param name="isAsc"></param>
+        /// <returns></returns>
+        public List<T> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, A>> orderBy2, bool isAsc)
+        {
+            if (orderBy1 != null)
+            {
+                if (orderBy2 != null)
+                {
+                    if (isAsc)
+                        return GetObjectSet().Where(where).OrderBy<T, A>(orderBy1).ThenBy<T, A>(orderBy2).ToList();
+                    else
+                        return GetObjectSet().Where(where).OrderByDescending<T, A>(orderBy1).ThenByDescending<T, A>(orderBy2).ToList();
+                }
+                else
+                {
+                    if (isAsc)
+                        return GetObjectSet().Where(where).OrderBy<T, A>(orderBy1).ToList();
+                    else
+                        return GetObjectSet().Where(where).OrderByDescending<T, A>(orderBy1).ToList();
+                }
+            }
+            else
+            {
+                if (orderBy2 != null)
+                {
+                    if (isAsc)
+                        return GetObjectSet().Where(where).OrderBy<T, A>(orderBy2).ToList();
+                    else
+                        return GetObjectSet().Where(where).OrderByDescending<T, A>(orderBy2).ToList();
+                }
+                else
+                {
+                    return GetObjectSet().Where(where).ToList();//排序都为null
+                }
+            }
+        }
+
+        /// <summary>
         /// 分页
         /// </summary>
         /// <typeparam name="A"></typeparam>
@@ -561,7 +762,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async Task<Tuple<List<T>, int>> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, A>> orderBy2, bool isAsc, int pageIndex, int pageSize)
+        public async Task<Tuple<List<T>, int>> QueryAsync<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, A>> orderBy2, bool isAsc, int pageIndex, int pageSize)
         {
             return await Task.Run(() =>
             {
@@ -609,12 +810,61 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="where"></param>
         /// <param name="orderBy1"></param>
         /// <param name="orderBy2"></param>
+        /// <param name="isAsc"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public Tuple<List<T>, int> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, A>> orderBy2, bool isAsc, int pageIndex, int pageSize)
+        {
+            var list = GetObjectSet();
+            if (where != null)
+                list = GetObjectSet().Where(where);
+            if (orderBy1 != null)
+            {
+                if (orderBy2 != null)
+                {
+                    if (isAsc)
+                        return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).ThenBy<T, A>(orderBy2).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                    else
+                        return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).ThenByDescending<T, A>(orderBy2).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                }
+                else
+                {
+                    if (isAsc)
+                        return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                    else
+                        return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                }
+            }
+            else
+            {
+                if (orderBy2 != null)
+                {
+                    if (isAsc)
+                        return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy2).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                    else
+                        return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy2).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                }
+                else
+                {
+                    return new Tuple<List<T>, int>(list.Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                }
+            }
+        }
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="orderBy1"></param>
+        /// <param name="orderBy2"></param>
         /// <param name="orderBy3"></param>
         /// <param name="isAsc"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async Task<Tuple<List<T>, int>> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, A>> orderBy2, Expression<Func<T, A>> orderBy3, bool isAsc, int pageIndex, int pageSize)
+        public async Task<Tuple<List<T>, int>> QueryAsync<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, A>> orderBy2, Expression<Func<T, A>> orderBy3, bool isAsc, int pageIndex, int pageSize)
         {
             return await Task.Run(() =>
             {
@@ -652,6 +902,52 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 分页
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="orderBy1"></param>
+        /// <param name="orderBy2"></param>
+        /// <param name="orderBy3"></param>
+        /// <param name="isAsc"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public Tuple<List<T>, int> Query<A>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, A>> orderBy2, Expression<Func<T, A>> orderBy3, bool isAsc, int pageIndex, int pageSize)
+        {
+            var list = GetObjectSet().Where(where);
+            if (orderBy1 != null)
+            {
+                if (orderBy2 != null)
+                {
+                    if (orderBy3 != null)
+                    {
+                        if (isAsc)
+                            return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).ThenBy<T, A>(orderBy2).ThenBy<T, A>(orderBy3).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                        else
+                            return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).ThenByDescending<T, A>(orderBy2)
+                                .ThenByDescending<T, A>(orderBy3).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                    }
+                    else
+                    {
+                        if (isAsc)
+                            return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).ThenBy<T, A>(orderBy2).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                        else
+                            return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).ThenByDescending<T, A>(orderBy2).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                    }
+                }
+                else
+                {
+                    if (isAsc)
+                        return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                    else
+                        return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                }
+            }
+            return new Tuple<List<T>, int>(list.Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+        }
+
+        /// <summary>
         /// 返回List
         /// </summary>
         /// <typeparam name="A"></typeparam>
@@ -661,7 +957,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="orderBy2"></param>
         /// <param name="isAsc"></param>
         /// <returns></returns>
-        public async Task<List<T>> Query<A, B>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, bool isAsc)
+        public async Task<List<T>> QueryAsync<A, B>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, bool isAsc)
         {
             return await Task.Run(() =>
             {
@@ -701,6 +997,52 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 返回List
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <typeparam name="B"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="orderBy1"></param>
+        /// <param name="orderBy2"></param>
+        /// <param name="isAsc"></param>
+        /// <returns></returns>
+        public List<T> Query<A, B>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, bool isAsc)
+        {
+            var list = GetObjectSet().Where(where);
+            if (orderBy1 != null)
+            {
+                if (orderBy2 != null)
+                {
+                    if (isAsc)
+                        return GetObjectSet().Where(where).OrderBy<T, A>(orderBy1).ThenBy<T, B>(orderBy2).ToList();
+                    else
+                        return GetObjectSet().Where(where).OrderByDescending<T, A>(orderBy1).ThenByDescending<T, B>(orderBy2).ToList();
+                }
+                else
+                {
+                    if (isAsc)
+                        return list.OrderBy<T, A>(orderBy1).ToList();
+                    else
+                        return list.OrderByDescending<T, A>(orderBy1).ToList();
+                }
+            }
+            else
+            {
+                if (orderBy2 != null)
+                {
+                    if (isAsc)
+                        return GetObjectSet().Where(where).OrderBy<T, B>(orderBy2).ToList();
+                    else
+                        return GetObjectSet().Where(where).OrderByDescending<T, B>(orderBy2).ToList();
+                }
+                else
+                {
+                    return GetObjectSet().Where(where).ToList();
+                }
+            }
+        }
+
+        /// <summary>
         /// 分页
         /// </summary>
         /// <typeparam name="A"></typeparam>
@@ -712,7 +1054,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async Task<Tuple<List<T>, int>> Query<A, B>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, bool isAsc, int pageIndex, int pageSize)
+        public async Task<Tuple<List<T>, int>> QueryAsync<A, B>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, bool isAsc, int pageIndex, int pageSize)
         {
             return await Task.Run(() =>
             {
@@ -739,6 +1081,41 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 分页
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <typeparam name="B"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="orderBy1"></param>
+        /// <param name="orderBy2"></param>
+        /// <param name="isAsc"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public Tuple<List<T>, int> Query<A, B>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, bool isAsc, int pageIndex, int pageSize)
+        {
+            var list = GetObjectSet().Where(where);
+            if (orderBy1 != null)
+            {
+                if (orderBy2 != null)
+                {
+                    if (isAsc)
+                        return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).ThenBy<T, B>(orderBy2).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                    else
+                        return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).ThenByDescending<T, B>(orderBy2).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                }
+                else
+                {
+                    if (isAsc)
+                        return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                    else
+                        return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList(), list.Count());
+                }
+            }
+            return new Tuple<List<T>, int>(list.ToList(), list.Count());
+        }
+
+        /// <summary>
         /// 返回List
         /// </summary>
         /// <typeparam name="A"></typeparam>
@@ -750,7 +1127,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="orderBy3"></param>
         /// <param name="isAsc"></param>
         /// <returns></returns>
-        public async Task<List<T>> Query<A, B, C>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, Expression<Func<T, C>> orderBy3, bool isAsc)
+        public async Task<List<T>> QueryAsync<A, B, C>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, Expression<Func<T, C>> orderBy3, bool isAsc)
         {
             return await Task.Run(() =>
             {
@@ -803,10 +1180,61 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="orderBy2"></param>
         /// <param name="orderBy3"></param>
         /// <param name="isAsc"></param>
+        /// <returns></returns>
+        public List<T> Query<A, B, C>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, Expression<Func<T, C>> orderBy3, bool isAsc)
+        {
+            var list = GetObjectSet();
+            if (where != null)
+                list = GetObjectSet().Where(where);
+            if (orderBy1 != null)
+            {
+                if (orderBy2 != null)
+                {
+                    if (orderBy3 != null)
+                    {
+                        if (isAsc)
+                            return list.OrderBy<T, A>(orderBy1).ThenBy<T, B>(orderBy2).ThenBy<T, C>(orderBy3)
+                                .ToList();
+                        else
+                        {
+                            return list.OrderByDescending<T, A>(orderBy1).ThenByDescending<T, B>(orderBy2)
+                                .ThenByDescending<T, C>(orderBy3).ToList();
+                        }
+                    }
+                    else
+                    {
+                        if (isAsc)
+                            return list.OrderBy<T, A>(orderBy1).ThenBy<T, B>(orderBy2).ToList();
+                        else
+                            return list.OrderByDescending<T, A>(orderBy1).ThenByDescending<T, B>(orderBy2).ToList();
+                    }
+                }
+                else
+                {
+                    if (isAsc)
+                        return list.OrderBy<T, A>(orderBy1).ToList();
+                    else
+                        return list.OrderByDescending<T, A>(orderBy1).ToList();
+                }
+            }
+            return list.ToList();
+        }
+
+        /// <summary>
+        /// 返回List
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <typeparam name="B"></typeparam>
+        /// <typeparam name="C"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="orderBy1"></param>
+        /// <param name="orderBy2"></param>
+        /// <param name="orderBy3"></param>
+        /// <param name="isAsc"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async Task<Tuple<List<T>, int>> Query<A, B, C>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, Expression<Func<T, C>> orderBy3, bool isAsc, int pageIndex, int pageSize)
+        public async Task<Tuple<List<T>, int>> QueryAsync<A, B, C>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, Expression<Func<T, C>> orderBy3, bool isAsc, int pageIndex, int pageSize)
         {
             return await Task.Run(() =>
             {
@@ -846,6 +1274,57 @@ namespace Nzh.Frame.Repository.Base
             });
         }
 
+        /// <summary>
+        /// 返回List
+        /// </summary>
+        /// <typeparam name="A"></typeparam>
+        /// <typeparam name="B"></typeparam>
+        /// <typeparam name="C"></typeparam>
+        /// <param name="where"></param>
+        /// <param name="orderBy1"></param>
+        /// <param name="orderBy2"></param>
+        /// <param name="orderBy3"></param>
+        /// <param name="isAsc"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public Tuple<List<T>, int> Query<A, B, C>(Expression<Func<T, bool>> where, Expression<Func<T, A>> orderBy1, Expression<Func<T, B>> orderBy2, Expression<Func<T, C>> orderBy3, bool isAsc, int pageIndex, int pageSize)
+        {
+            var list = GetObjectSet();
+            if (where != null)
+                list = GetObjectSet().Where(where);
+            if (orderBy1 != null)
+            {
+                if (orderBy2 != null)
+                {
+                    if (orderBy3 != null)
+                    {
+                        if (isAsc)
+                            return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).ThenBy<T, B>(orderBy2).ThenBy<T, C>(orderBy3).ToList(), list.Count());
+                        else
+                        {
+                            return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).ThenByDescending<T, B>(orderBy2).ThenByDescending<T, C>(orderBy3).AsQueryable().ToList(), list.Count());
+                        }
+                    }
+                    else
+                    {
+                        if (isAsc)
+                            return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).ThenBy<T, B>(orderBy2).ToList(), list.Count());
+                        else
+                            return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).ThenByDescending<T, B>(orderBy2).ToList(), list.Count());
+                    }
+                }
+                else
+                {
+                    if (isAsc)
+                        return new Tuple<List<T>, int>(list.OrderBy<T, A>(orderBy1).ToList(), list.Count());
+                    else
+                        return new Tuple<List<T>, int>(list.OrderByDescending<T, A>(orderBy1).ToList(), list.Count());
+                }
+            }
+            return new Tuple<List<T>, int>(list.ToList(), list.Count());
+        }
+
         #endregion
 
         #region  EF扩展方法
@@ -855,9 +1334,19 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public async Task ExecuteSql(string sql)
+        public async Task<bool> ExecuteSqlAsync(string sql)
         {
-            await Task.Run(() => _context.Database.ExecuteSqlCommand(sql));
+           return await Task.Run(() => _context.Database.ExecuteSqlCommandAsync(sql))>0;
+        }
+
+        /// <summary>
+        /// 执行Sql
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public bool ExecuteSql(string sql)
+        {
+            return  _context.Database.ExecuteSqlCommand(sql) > 0;
         }
 
         /// <summary>
@@ -866,9 +1355,20 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public async Task ExecuteSql(string sql, params object[] parameters)
+        public async Task<bool> ExecuteSqlAsync(string sql, params object[] parameters)
         {
-            await Task.Run(() => _context.Database.ExecuteSqlCommand(sql, parameters));
+           return await Task.Run(() => _context.Database.ExecuteSqlCommandAsync(sql, parameters))>0;
+        }
+
+        /// <summary>
+        ///  执行带参数的Sql
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public bool ExecuteSql(string sql, params object[] parameters)
+        {
+            return  _context.Database.ExecuteSqlCommand(sql, parameters) > 0;
         }
 
         /// <summary>
@@ -876,9 +1376,19 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="querySql"></param>
         /// <returns></returns>
-        public async Task<List<T>> QueryBySql(string querySql)
+        public async Task<List<T>> QueryBySqlAsync(string querySql)
         {
             return await Task.Run(() => GetObjectSet().FromSql(querySql).ToList());
+        }
+
+        /// <summary>
+        /// 执行Sql返回List
+        /// </summary>
+        /// <param name="querySql"></param>
+        /// <returns></returns>
+        public List<T> QueryBySql(string querySql)
+        {
+            return  GetObjectSet().FromSql(querySql).ToList();
         }
 
         /// <summary>
@@ -888,9 +1398,21 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async Task<List<T>> QueryBySql(string querySql, int pageIndex, int pageSize)
+        public async Task<List<T>> QueryBySqlAsync(string querySql, int pageIndex, int pageSize)
         {
             return await Task.Run(() => GetObjectSet().FromSql(querySql).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList());
+        }
+
+        /// <summary>
+        ///  执行Sql返回分页
+        /// </summary>
+        /// <param name="querySql"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public List<T> QueryBySql(string querySql, int pageIndex, int pageSize)
+        {
+            return   GetObjectSet().FromSql(querySql).Skip(pageSize * (pageIndex - 1)).Take(pageSize).ToList();
         }
 
         #endregion
