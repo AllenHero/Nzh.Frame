@@ -108,7 +108,7 @@ namespace Nzh.Frame.Service
        /// <returns></returns>
         public async Task<OperationResult<bool>> UpdateDemoAsync(Guid ID, string Name, string Sex, int Age, string Remark)
         {
-            using (var tran = _context.Database.BeginTransaction())//开始事务
+            using (var tran = _context.Database.BeginTransaction())//开始事务     
             {
                 try
                 {
