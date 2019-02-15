@@ -18,8 +18,6 @@ namespace Nzh.Frame.Service
         private readonly IDemoRepository _demoRepository;
         private readonly EFDbContext _context;
 
-        private readonly string DEFAULT_SORT_FIELD = "Age";
-
         public DemoService(IDemoRepository demoRepository,  EFDbContext context)
         {
             _demoRepository = demoRepository;
@@ -60,7 +58,7 @@ namespace Nzh.Frame.Service
         /// <returns></returns>
         public async Task<Demo> GetDemoByIDAsync(Guid ID)
         {
-           var demoModel = await _demoRepository.FindAsync(ID);
+            var demoModel = await _demoRepository.FindAsync(ID);
             return demoModel;
         }
 

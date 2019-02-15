@@ -674,7 +674,40 @@ namespace Nzh.Frame.Repository.Base
         {
             return await _context.Set<T>().SingleOrDefaultAsync(predicate);
         }
-        
+
+        /// <summary>
+        ///  根据条件获取实体
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="includeProperties"></param>
+        /// <returns></returns>
+        public T SingleOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return query.Where(predicate).SingleOrDefault();
+        }
+
+        /// <summary>
+        /// 根据条件获取实体
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="includeProperties"></param>
+        /// <returns></returns>
+        public async Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return await query.Where(predicate).FirstOrDefaultAsync();
+        }
+
+
         /// <summary>
         /// 返回List
         /// </summary>

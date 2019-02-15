@@ -127,6 +127,10 @@ namespace Nzh.Frame.IRepository.Base
 
         Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate);
 
+        T SingleOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+
+        Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+
         IEnumerable<T> GetList();
 
         Task<IEnumerable<T>> GetListAsync();
