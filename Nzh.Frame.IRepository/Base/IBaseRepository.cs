@@ -71,6 +71,22 @@ namespace Nzh.Frame.IRepository.Base
 
         Task<double> AverageAsync(Expression<Func<T, int>> selector);
 
+        int Count(Expression<Func<T, bool>> predicate);
+
+        Task<int> CountAsync(Expression<Func<T, bool>> predicate);
+
+        bool Contains(T entity);
+
+        Task<bool> ContainsAsync(T entity);
+
+        bool Any(Expression<Func<T, bool>> predicate);
+
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
+
+        bool All(Expression<Func<T, bool>> predicate);
+
+        Task<bool> AllAsync(Expression<Func<T, bool>> predicate);
+
         T First();
 
         Task<T> FirstAsync();
@@ -79,6 +95,17 @@ namespace Nzh.Frame.IRepository.Base
 
         Task<T> FirstAsync(Expression<Func<T, bool>> predicate);
 
+        T FirstOrDefault();
+
+        Task<T> FirstOrDefaultAsync();
+
+        T FirstOrDefault(Expression<Func<T, bool>> predicate);
+
+        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
+
+        T FirstOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+
+        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
 
         T Find(Guid ID);
 
@@ -100,18 +127,6 @@ namespace Nzh.Frame.IRepository.Base
 
         Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate);
 
-        bool Any(Expression<Func<T, bool>> predicate);
-
-        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
-
-        bool All(Expression<Func<T, bool>> predicate);
-
-        Task<bool> AllAsync(Expression<Func<T, bool>> predicate);
-
-        int Count(Expression<Func<T, bool>> predicate);
-
-        Task<int> CountAsync(Expression<Func<T, bool>> predicate);
-
         IEnumerable<T> GetList();
 
         Task<IEnumerable<T>> GetListAsync();
@@ -119,18 +134,6 @@ namespace Nzh.Frame.IRepository.Base
         IQueryable<T> GetAsIQuerable();
 
         Task<IQueryable<T>> GetAsIQuerableAsync();
-
-        T FirstOrDefault();
-
-        Task<T> FirstOrDefaultAsync();
-
-        T FirstOrDefault(Expression<Func<T, bool>> predicate);
-
-        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
-
-        T FirstOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
-
-        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
 
         int SaveChanges();
 
