@@ -55,6 +55,22 @@ namespace Nzh.Frame.IRepository.Base
 
         void EditRange(T[] entity);
 
+        int Sum(Expression<Func<T, int>> selector);
+
+        Task<int> SumAsync(Expression<Func<T, int>> selector);
+
+        int Max(Expression<Func<T, int>> selector);
+
+        Task<int> MaxAsync(Expression<Func<T, int>> selector);
+
+        int Min(Expression<Func<T, int>> selector);
+
+        Task<int> MinAsync(Expression<Func<T, int>> selector);
+
+        double Average(Expression<Func<T, int>> selector);
+
+        Task<double> AverageAsync(Expression<Func<T, int>> selector);
+
         T First();
 
         Task<T> FirstAsync();

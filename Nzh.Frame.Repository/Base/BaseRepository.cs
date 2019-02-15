@@ -308,6 +308,86 @@ namespace Nzh.Frame.Repository.Base
 
         #region 查询
 
+         /// <summary>
+         /// 求和
+         /// </summary>
+         /// <param name="selector"></param>
+         /// <returns></returns>
+        public virtual int Sum(Expression<Func<T, int>> selector)
+        {
+            return _context.Set<T>().Sum(selector);
+        }
+
+        /// <summary>
+        /// 求和
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public virtual async Task<int> SumAsync(Expression<Func<T, int>> selector)
+        {
+            return await _context.Set<T>().SumAsync(selector);
+        }
+
+        /// <summary>
+        /// 最大值
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public virtual int Max(Expression<Func<T, int>> selector)
+        {
+            return _context.Set<T>().Max(selector);
+        }
+
+        /// <summary>
+        /// 最大值
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public virtual async Task<int> MaxAsync(Expression<Func<T, int>> selector)
+        {
+            return await _context.Set<T>().MaxAsync(selector);
+        }
+
+        /// <summary>
+        /// 最小值
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public virtual int Min(Expression<Func<T, int>> selector)
+        {
+            return _context.Set<T>().Min(selector);
+        }
+
+        /// <summary>
+        /// 最小值
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public virtual async Task<int> MinAsync(Expression<Func<T, int>> selector)
+        {
+            return await  _context.Set<T>().MinAsync(selector);
+        }
+
+        /// <summary>
+        /// 平均值
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public virtual double Average(Expression<Func<T, int>> selector)
+        {
+            return  _context.Set<T>().Average(selector);
+        }
+
+        /// <summary>
+        /// 平均值
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public virtual async Task<double> AverageAsync(Expression<Func<T, int>> selector)
+        {
+            return await _context.Set<T>().AverageAsync(selector);
+        }
+
         /// <summary>
         /// 获取实体
         /// </summary>
@@ -1555,3 +1635,4 @@ namespace Nzh.Frame.Repository.Base
         #endregion
     }
 }
+
