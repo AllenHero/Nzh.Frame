@@ -55,41 +55,70 @@ namespace Nzh.Frame.IRepository.Base
 
         void EditRange(T[] entity);
 
+        T First();
+
+        Task<T> FirstAsync();
+
+        T First(Expression<Func<T, bool>> predicate);
+
+        Task<T> FirstAsync(Expression<Func<T, bool>> predicate);
+
+
         T Find(Guid ID);
 
         Task<T> FindAsync(Guid ID);
 
-        bool CheckExist(Expression<Func<T, bool>> predicate);
+        T Single();
 
-        Task<bool> CheckExistAsync(Expression<Func<T, bool>> predicate);
+        Task<T> SingleAsync();
+
+        T Single(Expression<Func<T, bool>> predicate);
+
+        Task<T> SingleAsync(Expression<Func<T, bool>> predicate);
+
+        T SingleOrDefault();
+
+        Task<T> SingleOrDefaultAsync();
+
+        T SingleOrDefault(Expression<Func<T, bool>> predicate);
+
+        Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate);
+
+        bool Any(Expression<Func<T, bool>> predicate);
+
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
+
+        bool All(Expression<Func<T, bool>> predicate);
+
+        Task<bool> AllAsync(Expression<Func<T, bool>> predicate);
 
         int Count(Expression<Func<T, bool>> predicate);
 
         Task<int> CountAsync(Expression<Func<T, bool>> predicate);
 
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetList();
 
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetListAsync();
 
-        IQueryable<T> GetAllAsIQuerable();
+        IQueryable<T> GetAsIQuerable();
 
-        Task<IQueryable<T>> GetAllAsIQuerableAsync();
+        Task<IQueryable<T>> GetAsIQuerableAsync();
 
-        T GetSingle(Guid ID);
+        T FirstOrDefault();
 
-        Task<T> GetSingleAsync(Guid ID);
+        Task<T> FirstOrDefaultAsync();
 
-        T GetSingle(Expression<Func<T, bool>> predicate);
+        T FirstOrDefault(Expression<Func<T, bool>> predicate);
 
-        Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate);
+        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
 
-        T GetSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+        T FirstOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
 
-        Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
 
-        int Commit();
+        int SaveChanges();
 
-        Task<int> CommitAsync();
+        Task<int> SaveChangesAsync();
 
         Task<List<T>> QueryAsync(int pageIndex, int pageSize);
 

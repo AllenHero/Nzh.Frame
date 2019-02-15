@@ -309,6 +309,45 @@ namespace Nzh.Frame.Repository.Base
         #region 查询
 
         /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <returns></returns>
+        public virtual T First()
+        {
+            return _context.Set<T>().First();
+        }
+
+        /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <returns></returns>
+        public virtual async Task<T> FirstAsync()
+        {
+            return await _context.Set<T>().FirstAsync();
+        }
+
+        /// <summary>
+        /// 根据条件获取实体
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual T First(Expression<Func<T, bool>> predicate)
+        {
+            return _context.Set<T>().First(predicate);
+        }
+
+        /// <summary>
+        /// 根据条件获取实体
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual async Task<T> FirstAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().FirstAsync(predicate);
+        }
+
+
+        /// <summary>
         /// 根据ID获取实体
         /// </summary>
         /// <param name="ID"></param>
@@ -329,11 +368,87 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
+        /// 获取单个实体
+        /// </summary>
+        /// <returns></returns>
+        public virtual T Single()
+        {
+            return _context.Set<T>().Single();
+        }
+
+        /// <summary>
+        /// 获取单个实体
+        /// </summary>
+        /// <returns></returns>
+        public virtual async Task<T> SingleAsync()
+        {
+            return await _context.Set<T>().SingleAsync();
+        }
+
+        /// <summary>
+        /// 根据条件获取单个实体
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual T Single(Expression<Func<T, bool>> predicate)
+        {
+            return _context.Set<T>().Single(predicate);
+        }
+
+        /// <summary>
+        /// 根据条件获取单个实体
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual  async Task<T> SingleAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().SingleAsync(predicate);
+        }
+
+        /// <summary>
+        /// 获取单个实体
+        /// </summary>
+        /// <returns></returns>
+        public virtual T SingleOrDefault()
+        {
+            return _context.Set<T>().SingleOrDefault();
+        }
+
+        /// <summary>
+        /// 获取单个实体
+        /// </summary>
+        /// <returns></returns>
+        public virtual async Task<T> SingleOrDefaultAsync()
+        {
+            return await _context.Set<T>().SingleOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// 根据条件获取单个实体
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual T SingleOrDefault(Expression<Func<T, bool>> predicate)
+        {
+            return  _context.Set<T>().SingleOrDefault(predicate);
+        }
+
+        /// <summary>
+        /// 根据条件获取单个实体
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual async Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().SingleOrDefaultAsync(predicate);
+        }
+
+        /// <summary>
         /// 判断是否存在
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public virtual bool CheckExist(Expression<Func<T, bool>> predicate)
+        public virtual bool Any(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Any(predicate);
         }
@@ -343,17 +458,38 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public async Task<bool> CheckExistAsync(Expression<Func<T, bool>> predicate)
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
         {
             return await _context.Set<T>().AnyAsync(predicate);
         }
+
+        /// <summary>
+        /// 包括条件和不在条件在内
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual bool All(Expression<Func<T, bool>> predicate)
+        {
+            return _context.Set<T>().All(predicate);
+        }
+
+        /// <summary>
+        /// 包括条件和不在条件在内
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public async Task<bool> AllAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().AllAsync(predicate);
+        }
+
 
         /// <summary>
         /// 返回数量
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public  int Count(Expression<Func<T, bool>> predicate)
+        public int Count(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Count(predicate);
         }
@@ -372,7 +508,7 @@ namespace Nzh.Frame.Repository.Base
         /// 返回List
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetList()
         {
             return _context.Set<T>().AsEnumerable().ToList();
         }
@@ -381,7 +517,7 @@ namespace Nzh.Frame.Repository.Base
         /// 返回List
         /// </summary>
         /// <returns></returns>
-        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetListAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
@@ -390,7 +526,7 @@ namespace Nzh.Frame.Repository.Base
         /// 查询
         /// </summary>
         /// <returns></returns>
-        public virtual IQueryable<T> GetAllAsIQuerable()
+        public virtual IQueryable<T> GetAsIQuerable()
         {
             return _context.Set<T>().AsNoTracking();
         }
@@ -399,7 +535,7 @@ namespace Nzh.Frame.Repository.Base
         /// 查询
         /// </summary>
         /// <returns></returns>
-        public virtual async Task<IQueryable<T>> GetAllAsIQuerableAsync()
+        public virtual async Task<IQueryable<T>> GetAsIQuerableAsync()
         {
             return await Task.Run(() => _context.Set<T>().AsNoTracking());
         }
@@ -409,7 +545,7 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public T GetSingle(Guid ID)
+        public T FirstOrDefault()
         {
             return _context.Set<T>().FirstOrDefault();
         }
@@ -419,7 +555,7 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public async Task<T> GetSingleAsync(Guid ID)
+        public async Task<T> FirstOrDefaultAsync()
         {
             return await _context.Set<T>().FirstOrDefaultAsync();
         }
@@ -429,7 +565,7 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public T GetSingle(Expression<Func<T, bool>> predicate)
+        public T FirstOrDefault(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().FirstOrDefault(predicate);
         }
@@ -439,7 +575,7 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
         {
             return await _context.Set<T>().FirstOrDefaultAsync(predicate);
         }
@@ -450,7 +586,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="predicate"></param>
         /// <param name="includeProperties"></param>
         /// <returns></returns>
-        public T GetSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public T FirstOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
             foreach (var includeProperty in includeProperties)
@@ -466,7 +602,7 @@ namespace Nzh.Frame.Repository.Base
         /// <param name="predicate"></param>
         /// <param name="includeProperties"></param>
         /// <returns></returns>
-        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
             foreach (var includeProperty in includeProperties)
@@ -480,7 +616,7 @@ namespace Nzh.Frame.Repository.Base
         /// 提交
         /// </summary>
         /// <returns></returns>
-        public virtual int Commit()
+        public virtual int SaveChanges()
         {
             return _context.SaveChanges();
         }
@@ -489,7 +625,7 @@ namespace Nzh.Frame.Repository.Base
         /// 提交
         /// </summary>
         /// <returns></returns>
-        public virtual async Task<int> CommitAsync()
+        public virtual async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
         }

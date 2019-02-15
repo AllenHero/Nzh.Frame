@@ -37,7 +37,7 @@ namespace Nzh.Frame.Service
         public async Task<PageResult<Demo>> GetDemoPageAsyncList(int PageIndex, int PageSize, string SortField, string SortType)
         {
             var demoList = new PageResult<Demo>();
-            var demoModel = _demoRepository.GetAllAsIQuerable();
+            var demoModel = _demoRepository.GetAsIQuerable();
             var MaxPage = demoModel.Count() == 0 ? demoModel.Count() / PageSize : (demoModel.Count() / PageSize) + 1;
             if (PageIndex > MaxPage)
             {
