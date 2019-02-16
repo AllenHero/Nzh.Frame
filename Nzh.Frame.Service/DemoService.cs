@@ -47,7 +47,7 @@ namespace Nzh.Frame.Service
             demoList.TotalCount = demoModel.Count();
             if (demoModel.Any())
             {
-                demoList.list = await PaginationHelper.SortingAndPaging(demoModel.AsQueryable(), SortField, SortType, PageIndex, PageSize).ToListAsync();
+                demoList.list = await PaginationHelper.SortingAndPaging(demoModel, SortField, SortType, PageIndex, PageSize).ToListAsync();
             }
             return demoList;
         }
