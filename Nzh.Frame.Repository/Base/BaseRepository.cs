@@ -732,15 +732,7 @@ namespace Nzh.Frame.Repository.Base
         /// <returns></returns>
         public virtual IQueryable<T> GetAsIQuerable()
         {
-            try
-            {
-                return _context.Set<T>().AsNoTracking();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-           
+            return _context.Set<T>().AsNoTracking();
         }
 
         /// <summary>

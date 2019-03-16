@@ -46,7 +46,7 @@ namespace Nzh.Frame.Controllers
             {
                 result.data = await _demoService.GetDemoPageAsyncList(PageIndex, PageSize, SortField, SortType);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 result.code = -1;
                 result.msg = ex.Message;
