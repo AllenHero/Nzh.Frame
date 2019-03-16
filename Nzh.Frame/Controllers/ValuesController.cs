@@ -9,7 +9,8 @@ namespace Nzh.Frame.Controllers
     /// <summary>
     ///  Values
     /// </summary>
-    [Route("api/[controller]")]
+    [Produces("application/json")]
+    [Route("api/Values")]
     public class ValuesController : Controller
     {
         // GET api/values
