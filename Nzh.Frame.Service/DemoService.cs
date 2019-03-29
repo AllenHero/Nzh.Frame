@@ -19,8 +19,6 @@ namespace Nzh.Frame.Service
         private readonly IDemoRepository _demoRepository;
         private readonly EFDbContext _context;
 
-        
-
         public DemoService(IDemoRepository demoRepository,  EFDbContext context)
         {
             _demoRepository = demoRepository;
