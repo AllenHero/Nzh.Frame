@@ -37,7 +37,7 @@ namespace Nzh.Frame
             services.AddMvc();
 
             services.AddDbContext<EFDbContext>(option =>
-                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                 option.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
 
             //var config = new MapperConfiguration(cfg =>
             //{
