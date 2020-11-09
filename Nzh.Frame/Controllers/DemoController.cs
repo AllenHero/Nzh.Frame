@@ -58,15 +58,15 @@ namespace Nzh.Frame.Controllers
         /// <summary>
         ///  获取Demo
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpGet("GetDemoByIDAsync")]
-        public async Task<JsonResult> GetDemoByIDAsync(Guid ID)
+        [HttpGet("GetDemoByIdAsync")]
+        public async Task<JsonResult> GetDemoByIdAsync(Guid Id)
         {
             var result = new OperationResult<Demo>();
             try
             {
-                result.data = await _demoService.GetDemoByIDAsync(ID);
+                result.data = await _demoService.GetDemoByIdAsync(Id);
             }
             catch (Exception ex)
             {
@@ -105,19 +105,19 @@ namespace Nzh.Frame.Controllers
         /// <summary>
         /// 修改Demo
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <param name="Name"></param>
         /// <param name="Sex"></param>
         /// <param name="Age"></param>
         /// <param name="Remark"></param>
         /// <returns></returns>
         [HttpPut("UpdateDemoAsync")]
-        public async Task<JsonResult> UpdateDemoAsync(Guid ID, string Name, string Sex, int Age, string Remark)
+        public async Task<JsonResult> UpdateDemoAsync(Guid Id, string Name, string Sex, int Age, string Remark)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result = await _demoService.UpdateDemoAsync(ID, Name, Sex, Age, Remark);
+                result = await _demoService.UpdateDemoAsync(Id, Name, Sex, Age, Remark);
             }
             catch (Exception ex)
             {
@@ -131,15 +131,15 @@ namespace Nzh.Frame.Controllers
         /// <summary>
         /// 删除Demo
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete("DeleteDemoAsync")]
-        public async Task<JsonResult> DeleteDemoAsync(Guid ID)
+        public async Task<JsonResult> DeleteDemoAsync(Guid Id)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result = await _demoService.DeleteDemoAsync(ID);
+                result = await _demoService.DeleteDemoAsync(Id);
             }
             catch (Exception ex)
             {

@@ -23,9 +23,9 @@ namespace Nzh.Frame.IService
         /// <summary>
         ///  获取Demo
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        Task<Demo> GetDemoByIDAsync(Guid ID);
+        Task<Demo> GetDemoByIdAsync(Guid Id);
 
         /// <summary>
         /// 添加Demo
@@ -40,19 +40,19 @@ namespace Nzh.Frame.IService
         /// <summary>
         /// 修改Demo
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <param name="Name"></param>
         /// <param name="Sex"></param>
         /// <param name="Age"></param>
         /// <param name="Remark"></param>
         /// <returns></returns>
-        Task<OperationResult<bool>> UpdateDemoAsync(Guid ID, string Name, string Sex, int Age, string Remark);
+        Task<OperationResult<bool>> UpdateDemoAsync(Guid Id, string Name, string Sex, int Age, string Remark);
 
         /// <summary>
         /// 删除Demo
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        Task<OperationResult<bool>> DeleteDemoAsync(Guid ID);
+        Task<OperationResult<bool>> DeleteDemoAsync(Guid Id);
     }
 }

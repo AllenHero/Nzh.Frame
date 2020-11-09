@@ -55,11 +55,11 @@ namespace Nzh.Frame.Service
         /// <summary>
         /// 获取Demo
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<Demo> GetDemoByIDAsync(Guid ID)
+        public async Task<Demo> GetDemoByIdAsync(Guid Id)
         {
-            var demoModel = await _demoRepository.FindAsync(ID);
+            var demoModel = await _demoRepository.FindAsync(Id);
             return demoModel;
         }
 
@@ -78,7 +78,7 @@ namespace Nzh.Frame.Service
                 try
                 {
                     Demo model = new Demo();
-                    model.ID = Guid.NewGuid();
+                    model.Id = Guid.NewGuid();
                     model.Name = Name;
                     model.Sex = Sex;
                     model.Age = Age;
@@ -96,23 +96,23 @@ namespace Nzh.Frame.Service
             }
         }
 
-       /// <summary>
-       /// 修改Demo
-       /// </summary>
-       /// <param name="ID"></param>
-       /// <param name="Name"></param>
-       /// <param name="Sex"></param>
-       /// <param name="Age"></param>
-       /// <param name="Remark"></param>
-       /// <returns></returns>
-        public async Task<OperationResult<bool>> UpdateDemoAsync(Guid ID, string Name, string Sex, int Age, string Remark)
+        /// <summary>
+        /// 修改Demo
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="Name"></param>
+        /// <param name="Sex"></param>
+        /// <param name="Age"></param>
+        /// <param name="Remark"></param>
+        /// <returns></returns>
+        public async Task<OperationResult<bool>> UpdateDemoAsync(Guid Id, string Name, string Sex, int Age, string Remark)
         {
             using (var tran = _context.Database.BeginTransaction())//开始事务     
             {
                 try
                 {
                     var result = new OperationResult<bool>();
-                    var demo = await _demoRepository.FindAsync(ID);
+                    var demo = await _demoRepository.FindAsync(Id);
                     if (demo != null)
                     {
                         demo.Name = Name;
@@ -135,16 +135,16 @@ namespace Nzh.Frame.Service
         /// <summary>
         /// 删除Demo
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<OperationResult<bool>> DeleteDemoAsync(Guid ID)
+        public async Task<OperationResult<bool>> DeleteDemoAsync(Guid Id)
         {
             using (var tran = _context.Database.BeginTransaction())//开始事务
             {
                 try
                 {
                     var result = new OperationResult<bool>();
-                    var demo = await _demoRepository.FindAsync(ID);
+                    var demo = await _demoRepository.FindAsync(Id);
                     if (demo != null)
                     {
                         result.data = await _demoRepository.DeleteAsync(demo);
