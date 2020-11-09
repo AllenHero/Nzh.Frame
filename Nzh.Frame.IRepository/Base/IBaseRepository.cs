@@ -107,9 +107,9 @@ namespace Nzh.Frame.IRepository.Base
 
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
 
-        T Find(Guid ID);
+        T Find(Guid Id);
 
-        Task<T> FindAsync(Guid ID);
+        Task<T> FindAsync(Guid Id);
 
         T Single();
 

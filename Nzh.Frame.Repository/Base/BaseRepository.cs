@@ -507,9 +507,9 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
-        /// 根据ID获取实体
+        /// 根据Id获取实体
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
         public T FirstOrDefault()
         {
@@ -517,9 +517,9 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
-        /// 根据ID获取实体
+        /// 根据Id获取实体
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
         public async Task<T> FirstOrDefaultAsync()
         {
@@ -580,23 +580,23 @@ namespace Nzh.Frame.Repository.Base
 
 
         /// <summary>
-        /// 根据ID获取实体
+        /// 根据Id获取实体
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        public virtual T Find(Guid ID)
+        public virtual T Find(Guid Id)
         {
-            return  _context.Set<T>().Find(ID);
+            return  _context.Set<T>().Find(Id);
         }
 
         /// <summary>
-        /// 根据ID获取实体
+        /// 根据Id获取实体
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<T> FindAsync(Guid ID)
+        public async Task<T> FindAsync(Guid Id)
         {
-            return await _context.Set<T>().FindAsync(ID);
+            return await _context.Set<T>().FindAsync(Id);
         }
 
         /// <summary>
