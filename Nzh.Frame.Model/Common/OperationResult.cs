@@ -40,6 +40,6 @@ namespace Nzh.Frame.Model.Common
         /// <summary>
         /// 数据
         /// </summary>
-        public T data { get; set; }
+        public dynamic data { get; set; }
     }
 }

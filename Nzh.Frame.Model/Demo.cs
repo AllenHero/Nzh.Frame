@@ -12,7 +12,7 @@ namespace Nzh.Frame.Model
         /// <summary>
         /// Id
         /// </summary>
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Name

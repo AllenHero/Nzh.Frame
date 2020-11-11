@@ -78,7 +78,7 @@ namespace Nzh.Frame.Service
                 try
                 {
                     Demo model = new Demo();
-                    model.Id = Guid.NewGuid();
+                    model.Id = Guid.NewGuid().ToString();
                     model.Name = Name;
                     model.Sex = Sex;
                     model.Age = Age;
