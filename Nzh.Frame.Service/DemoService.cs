@@ -57,7 +57,7 @@ namespace Nzh.Frame.Service
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<Demo> GetDemoByIdAsync(Guid Id)
+        public async Task<Demo> GetDemoByIdAsync(string Id)
         {
             var demoModel = await _demoRepository.FindAsync(Id);
             return demoModel;
@@ -105,7 +105,7 @@ namespace Nzh.Frame.Service
         /// <param name="Age"></param>
         /// <param name="Remark"></param>
         /// <returns></returns>
-        public async Task<OperationResult<bool>> UpdateDemoAsync(Guid Id, string Name, string Sex, int Age, string Remark)
+        public async Task<OperationResult<bool>> UpdateDemoAsync(string Id, string Name, string Sex, int Age, string Remark)
         {
             using (var tran = _context.Database.BeginTransaction())//开始事务     
             {
@@ -137,7 +137,7 @@ namespace Nzh.Frame.Service
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<OperationResult<bool>> DeleteDemoAsync(Guid Id)
+        public async Task<OperationResult<bool>> DeleteDemoAsync(string Id)
         {
             using (var tran = _context.Database.BeginTransaction())//开始事务
             {

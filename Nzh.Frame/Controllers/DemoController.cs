@@ -61,7 +61,7 @@ namespace Nzh.Frame.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpGet("GetDemoByIdAsync")]
-        public async Task<JsonResult> GetDemoByIdAsync(Guid Id)
+        public async Task<JsonResult> GetDemoByIdAsync(string Id)
         {
             var result = new OperationResult<Demo>();
             try
@@ -112,7 +112,7 @@ namespace Nzh.Frame.Controllers
         /// <param name="Remark"></param>
         /// <returns></returns>
         [HttpPut("UpdateDemoAsync")]
-        public async Task<JsonResult> UpdateDemoAsync(Guid Id, string Name, string Sex, int Age, string Remark)
+        public async Task<JsonResult> UpdateDemoAsync(string Id, string Name, string Sex, int Age, string Remark)
         {
             var result = new OperationResult<bool>();
             try
@@ -131,10 +131,10 @@ namespace Nzh.Frame.Controllers
         /// <summary>
         /// 删除Demo
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="Id"></param>str
         /// <returns></returns>
         [HttpDelete("DeleteDemoAsync")]
-        public async Task<JsonResult> DeleteDemoAsync(Guid Id)
+        public async Task<JsonResult> DeleteDemoAsync(string Id)
         {
             var result = new OperationResult<bool>();
             try

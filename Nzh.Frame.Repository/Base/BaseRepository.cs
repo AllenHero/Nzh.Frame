@@ -582,7 +582,7 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public virtual T Find(Guid Id)
+        public virtual T Find(string Id)
         {
             return  _context.Set<T>().Find(Id);
         }
@@ -592,7 +592,7 @@ namespace Nzh.Frame.Repository.Base
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task<T> FindAsync(Guid Id)
+        public async Task<T> FindAsync(string Id)
         {
             return await _context.Set<T>().FindAsync(Id);
         }
