@@ -38,13 +38,13 @@ namespace Nzh.Frame.Controllers
         /// <param name="SortField"></param>
         /// <param name="SortType"></param>
         /// <returns></returns>
-        [HttpGet("GetDemoPageAsyncList")]
-        public async Task<JsonResult> GetDemoPageAsyncList(int PageIndex, int PageSize,string SortField ,string SortType)
+        [HttpGet("GetDemoPageListAsync")]
+        public async Task<JsonResult> GetDemoPageListAsync(int PageIndex, int PageSize,string SortField ,string SortType)
         {
             var result = new OperationResult<PageResult<Demo>>();
             try
             {
-                result.data = await _demoService.GetDemoPageAsyncList(PageIndex, PageSize, SortField, SortType);
+                result.data = await _demoService.GetDemoPageListAsync(PageIndex, PageSize, SortField, SortType);
             }
             catch (Exception ex)
             {
@@ -85,13 +85,13 @@ namespace Nzh.Frame.Controllers
         /// <param name="Age"></param>
         /// <param name="Remark"></param>
         /// <returns></returns>
-        [HttpPost("AddDemoAsync")]
-        public async Task<JsonResult> AddDemoAsync(string Name, string Sex, int Age, string Remark)
+        [HttpPost("InsertDemoAsync")]
+        public async Task<JsonResult> InsertDemoAsync(string Name, string Sex, int Age, string Remark)
         {
             var result = new OperationResult<bool>();
             try
             {
-                result = await _demoService.AddDemoAsync(Name, Sex, Age, Remark);
+                result = await _demoService.InsertDemoAsync(Name, Sex, Age, Remark);
             }
             catch (Exception ex)
             {

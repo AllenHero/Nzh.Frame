@@ -9,17 +9,17 @@ namespace Nzh.Frame.IRepository.Base
 {
     public interface IBaseRepository<T> where T : class, new()
     {
-        void Add(T entity);
+        void Insert(T entity);
 
-        Task<bool> AddAsync(T entity);
+        Task<bool> InsertAsync(T entity);
 
-        void AddRange(IEnumerable<T> entity);
+        void InsertRange(IEnumerable<T> entity);
 
-        Task<bool> AddRangeAsync(IEnumerable<T> entity);
+        Task<bool> InsertRangeAsync(IEnumerable<T> entity);
 
-        void AddRange(T[] entity);
+        void InsertRange(T[] entity);
 
-        Task<bool> AddRangeAsync(T[] entity);
+        Task<bool> InsertRangeAsync(T[] entity);
 
         bool Delete(T entity);
 

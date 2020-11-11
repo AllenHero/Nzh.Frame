@@ -18,7 +18,7 @@ namespace Nzh.Frame.IService
         /// <param name="SortField"></param>
         /// <param name="SortType"></param>
         /// <returns></returns>
-        Task<PageResult<Demo>> GetDemoPageAsyncList(int PageIndex, int PageSize, string SortField, string SortType);
+        Task<PageResult<Demo>> GetDemoPageListAsync(int PageIndex, int PageSize, string SortField, string SortType);
 
         /// <summary>
         ///  获取Demo
@@ -35,7 +35,7 @@ namespace Nzh.Frame.IService
         /// <param name="Age"></param>
         /// <param name="Remark"></param>
         /// <returns></returns>
-        Task<OperationResult<bool>> AddDemoAsync(string Name, string Sex, int Age, string Remark);
+        Task<OperationResult<bool>> InsertDemoAsync(string Name, string Sex, int Age, string Remark);
 
         /// <summary>
         /// 修改Demo

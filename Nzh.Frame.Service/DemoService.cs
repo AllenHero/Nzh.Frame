@@ -33,7 +33,7 @@ namespace Nzh.Frame.Service
         /// <param name="SortField"></param>
         /// <param name="SortType"></param>
         /// <returns></returns>
-        public async Task<PageResult<Demo>> GetDemoPageAsyncList(int PageIndex, int PageSize, string SortField, string SortType)
+        public async Task<PageResult<Demo>> GetDemoPageListAsync(int PageIndex, int PageSize, string SortField, string SortType)
         {
             var demoList = new PageResult<Demo>();
             var demoModel = _demoRepository.GetAsIQuerable();
@@ -71,7 +71,7 @@ namespace Nzh.Frame.Service
         /// <param name="Age"></param>
         /// <param name="Remark"></param>
         /// <returns></returns>
-        public async Task<OperationResult<bool>> AddDemoAsync(string Name, string Sex, int Age, string Remark)
+        public async Task<OperationResult<bool>> InsertDemoAsync(string Name, string Sex, int Age, string Remark)
         {
             using (var tran = _context.Database.BeginTransaction())//开始事务
             {
@@ -84,7 +84,7 @@ namespace Nzh.Frame.Service
                     model.Age = Age;
                     model.Remark = Remark;
                     var result = new OperationResult<bool>();
-                    result.data = await _demoRepository.AddAsync(model);
+                    result.data = await _demoRepository.InsertAsync(model);
                     tran.Commit();//提交事务
                     return result;
                 }

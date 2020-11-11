@@ -28,21 +28,21 @@ namespace Nzh.Frame.Repository.Base
         #region  新增
 
         /// <summary>
-        /// 添加
+        /// 新增
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void Add(T entity)
+        public virtual void Insert(T entity)
         {
             EntityEntry dbEntityEntry = _context.Entry(entity);
             _context.Set<T>().Add(entity);
         }
 
         /// <summary>
-        /// 添加
+        /// 新增
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual async Task<bool> AddAsync(T entity)
+        public virtual async Task<bool> InsertAsync(T entity)
         {
             EntityEntry dbEntityEntry = _context.Entry(entity);
             await _context.Set<T>().AddAsync(entity);
@@ -50,46 +50,44 @@ namespace Nzh.Frame.Repository.Base
         }
 
         /// <summary>
-        /// 批量添加
+        /// 批量新增
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void AddRange(IEnumerable<T> entity)
+        public virtual void InsertRange(IEnumerable<T> entity)
         {
             EntityEntry dbEntityEntry = _context.Entry(entity);
             _context.Set<T>().AddRange(entity);
         }
 
         /// <summary>
-        /// 批量添加
+        /// 批量新增
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual async Task<bool> AddRangeAsync(IEnumerable<T> entity)
+        public virtual async Task<bool> InsertRangeAsync(IEnumerable<T> entity)
         {
             EntityEntry dbEntityEntry = _context.Entry(entity);
             await _context.Set<T>().AddRangeAsync(entity);
             return await _context.SaveChangesAsync() >= 1;
         }
 
-
-
         /// <summary>
-        /// 批量添加
+        /// 批量新增
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void AddRange(T[] entity)
+        public virtual void InsertRange(T[] entity)
         {
             EntityEntry dbEntityEntry = _context.Entry(entity);
             _context.Set<T>().AddRange(entity);
         }
 
-       
+
         /// <summary>
-        /// 批量添加
+        /// 批量新增
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual async Task<bool> AddRangeAsync(T[] entity)
+        public virtual async Task<bool> InsertRangeAsync(T[] entity)
         {
             EntityEntry dbEntityEntry = _context.Entry(entity);
             await _context.Set<T>().AddRangeAsync(entity);
