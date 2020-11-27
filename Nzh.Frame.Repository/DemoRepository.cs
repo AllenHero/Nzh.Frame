@@ -1,5 +1,4 @@
-﻿
-using Nzh.Frame.IRepository;
+﻿using Nzh.Frame.IRepository;
 using Nzh.Frame.Model;
 using Nzh.Frame.Repository.Base;
 using Nzh.Frame.Repository.EF;

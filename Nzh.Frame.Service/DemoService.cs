@@ -5,6 +5,7 @@ using Nzh.Frame.IService;
 using Nzh.Frame.Model;
 using Nzh.Frame.Model.Common;
 using Nzh.Frame.Repository.EF;
+using Nzh.Frame.Service.Base;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Nzh.Frame.Service
 {
-    public class DemoService : IDemoService
+    public class DemoService : BaseService, IDemoService
     {
         private readonly IDemoRepository _demoRepository;
         private readonly EFDbContext _context;
