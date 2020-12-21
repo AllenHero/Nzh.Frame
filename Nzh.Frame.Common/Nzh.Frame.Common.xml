@@ -4,13 +4,6 @@
         <name>Nzh.Frame.Common</name>
     </assembly>
     <members>
-        <member name="M:Nzh.Frame.Common.Factory.SiteServicesExtensions.AddRepositories(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注入服务、仓储类
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
         <member name="T:Nzh.Frame.Common.Helper.CsvHelper">
             <summary>
             Csv辅助类 
@@ -388,7 +381,7 @@
             解析JSON数组生成对象实体集合
             </summary>
             <typeparam name="T">对象类型</typeparam>
-            <param name="json">json数组字符串(eg.[{"ID":"112","Name":"石子儿"}])</param>
+            <param name="json">json数组字符串(eg.[{"Id":"112","Name":"石子儿"}])</param>
             <returns>对象实体集合</returns>
         </member>
         <member name="M:Nzh.Frame.Common.Helper.JsonHelper.DeserializeAnonymousType``1(System.String,``0)">
@@ -623,7 +616,7 @@
             <param name="str"></param>
             <returns></returns>
         </member>
-        <!-- 对于成员“M:Nzh.Frame.Common.Helper.StringHelper.GetArrayStr(System.Collections.Generic.List{System.String},System.String)”忽略有格式错误的 XML 注释 -->
+        <!-- Badly formed XML comment ignored for member "M:Nzh.Frame.Common.Helper.StringHelper.GetArrayStr(System.Collections.Generic.List{System.String},System.String)" -->
         <member name="M:Nzh.Frame.Common.Helper.StringHelper.GetArrayStr(System.Collections.Generic.List{System.Int32})">
             <summary>
             得到数组列表以逗号分隔的字符串
@@ -709,7 +702,7 @@
             获取正确的Id，如果不是正整数，返回0
             </summary>
             <param name="_value"></param>
-            <returns>返回正确的整数ID，失败返回0</returns>
+            <returns>返回正确的整数Id，失败返回0</returns>
         </member>
         <member name="M:Nzh.Frame.Common.Helper.StringHelper.IsNumberId(System.String)">
             <summary>

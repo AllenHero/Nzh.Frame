@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\64450\Desktop\Nzh.Frame\Nzh.Frame\Nzh.Frame.xml</DocumentationFile>
-    <OutputPath>bin\Debug\netcoreapp2.0\</OutputPath>
+    <DocumentationFile>D:\Github\Nzh.Frame\Nzh.Frame\Nzh.Frame.xml</DocumentationFile>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

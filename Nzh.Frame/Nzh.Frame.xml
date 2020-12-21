@@ -13,44 +13,51 @@
             <summary>
             构造函数
             </summary>
-            <param name="demoservice"></param>
+            <param name="demoService"></param>
         </member>
-        <member name="M:Nzh.Frame.Controllers.DemoController.GetDemoPageAsyncList(Nzh.Frame.Model.Common.QueryHelper)">
+        <member name="M:Nzh.Frame.Controllers.DemoController.GetDemoPageListAsync(System.Int32,System.Int32,System.String,System.String)">
             <summary>
             获取Demo分页
             </summary>
-            <param name="Name"></param>
             <param name="PageIndex"></param>
             <param name="PageSize"></param>
-            <param name="SortExpression"></param>
+            <param name="SortField"></param>
+            <param name="SortType"></param>
             <returns></returns>
         </member>
-        <member name="M:Nzh.Frame.Controllers.DemoController.GetDemoByIDAsync(System.Guid)">
+        <member name="M:Nzh.Frame.Controllers.DemoController.GetDemoByIdAsync(System.String)">
             <summary>
-             获取单个Demo
+             获取Demo
             </summary>
-            <param name="ID"></param>
+            <param name="Id"></param>
             <returns></returns>
         </member>
-        <member name="M:Nzh.Frame.Controllers.DemoController.AddDemoAsync(Nzh.Frame.Model.Demo)">
+        <member name="M:Nzh.Frame.Controllers.DemoController.InsertDemoAsync(System.String,System.String,System.Int32,System.String)">
             <summary>
-            新增Demo
+            添加Demo
             </summary>
-            <param name="model"></param>
+            <param name="Name"></param>
+            <param name="Sex"></param>
+            <param name="Age"></param>
+            <param name="Remark"></param>
             <returns></returns>
         </member>
-        <member name="M:Nzh.Frame.Controllers.DemoController.UpdateDemoAsync(Nzh.Frame.Model.Demo)">
+        <member name="M:Nzh.Frame.Controllers.DemoController.UpdateDemoAsync(System.String,System.String,System.String,System.Int32,System.String)">
             <summary>
             修改Demo
             </summary>
-            <param name="model"></param>
+            <param name="Id"></param>
+            <param name="Name"></param>
+            <param name="Sex"></param>
+            <param name="Age"></param>
+            <param name="Remark"></param>
             <returns></returns>
         </member>
-        <member name="M:Nzh.Frame.Controllers.DemoController.DeleteDemoAsync(System.Guid)">
+        <member name="M:Nzh.Frame.Controllers.DemoController.DeleteDemoAsync(System.String)">
             <summary>
             删除Demo
             </summary>
-            <param name="ID"></param>
+            <param name="Id"></param>str
             <returns></returns>
         </member>
         <member name="T:Nzh.Frame.Controllers.ValuesController">
